@@ -12,7 +12,7 @@ function consulta_cpf(cpf) {
                 $("input[name='cpf']").focus();
                 $("input[name='cpf']").css("border-color", "red");
                 cpf_valido = false;
-            } else if(dados.erro) {
+            } else if(dados.erro || dados.erroCodigo) {
                 cpf_valido = true;
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
