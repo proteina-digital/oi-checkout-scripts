@@ -8,7 +8,7 @@ function consulta_cpf(cpf) {
         type: 'get',
         async: false,
         success: function (dados) {
-            if (dados.erro === 'CPF inválido') {
+            if (dados.erro === 'CPF inválido!') {
                 $("input[name='cpf']").focus();
                 $("input[name='cpf']").css("border-color", "red");
                 cpf_valido = false;
