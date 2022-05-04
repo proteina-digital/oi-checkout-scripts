@@ -12,16 +12,19 @@ function consulta_cpf(cpf) {
                 $("input[name='cpf']").focus();
                 $("input[name='cpf']").css("border-color", "red");
                 cpf_valido = false;
+                return;
             } else if(dados.erro || dados.erroCodigo) {
                 cpf_valido = true;
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
                 $("input[name='data_nascimento']").parent().removeClass('hide')
+                return;
             } else {
                 cpf_valido = true;
                 $("input[name='nome_completo']").val(dados.nome)
                 $("input[name='nome_mae']").val(dados.mae)
                 $("input[name='data_nascimento']").val(dados.nascimento)
+                return;
             }
         },
         error: function (jqxhr, status, exception) {
