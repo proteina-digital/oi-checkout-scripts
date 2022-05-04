@@ -9,12 +9,13 @@ function consulta_cpf(cpf) {
         // async: false,
         timeout: 3000,
         success: function (dados) {
+            console.log(dados.erro)
             if (dados.erro === 'CPF inválido!') {
                 cpf_valido = false;
                 $("input[name='cpf']").focus();
                 $("input[name='cpf']").css("border-color", "red");
                 return;
-            } else if(dados.erro || dados.erroCodigo) {
+            } else if (dados.erro || dados.erroCodigo) {
                 cpf_valido = true;
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
@@ -31,10 +32,12 @@ function consulta_cpf(cpf) {
             }
         },
         error: function (jqxhr, status, exception) {
-            cpf_valido = false;
+            cpf_valido = true;
             $("input[name='nome_completo']").parent().removeClass('hide')
             $("input[name='nome_mae']").parent().removeClass('hide')
             $("input[name='data_nascimento']").parent().removeClass('hide')
+
+            $("input[name='nome_completo']").focus();
             console.log(jqxhr);
             console.log(status);
             console.log(exception);
@@ -224,8 +227,8 @@ Webflow.push(function () {
     form.on("submit", function (e) {
         e.preventDefault(e);
 
-        if(!cpf_valido) return false;
-        
+        if (!cpf_valido) return false;
+
         var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='rg']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
