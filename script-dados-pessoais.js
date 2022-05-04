@@ -6,7 +6,8 @@ function consulta_cpf(cpf) {
         dataType: "json",
         url: "https://formularios.proteina.digital/escale/consulta_cpf.php?cpf=" + cpf,
         type: 'get',
-        async: false,
+        // async: false,
+        timeout: 3000,
         success: function (dados) {
             if (dados.erro === 'CPF inválido!') {
                 cpf_valido = false;
@@ -18,7 +19,7 @@ function consulta_cpf(cpf) {
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
                 $("input[name='data_nascimento']").parent().removeClass('hide')
-                
+
                 $("input[name='nome_completo']").focus();
                 return;
             } else {
