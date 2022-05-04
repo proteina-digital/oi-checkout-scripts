@@ -9,7 +9,6 @@ function consulta_cpf(cpf) {
         // async: false,
         timeout: 3000,
         success: function (dados) {
-            console.log(dados.erro)
             if (dados.erro === 'CPF inválido!') {
                 cpf_valido = false;
                 $("input[name='cpf']").focus();
