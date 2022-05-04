@@ -9,20 +9,19 @@ function consulta_cpf(cpf) {
         async: false,
         success: function (dados) {
             if (dados.erro === 'CPF inválido!') {
-                console.log('1')
                 cpf_valido = false;
                 $("input[name='cpf']").focus();
                 $("input[name='cpf']").css("border-color", "red");
                 return;
             } else if(dados.erro || dados.erroCodigo) {
-                console.log('2')
                 cpf_valido = true;
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
                 $("input[name='data_nascimento']").parent().removeClass('hide')
+                
+                $("input[name='nome_completo']").focus();
                 return;
             } else {
-                console.log('3')
                 cpf_valido = true;
                 $("input[name='nome_completo']").val(dados.nome)
                 $("input[name='nome_mae']").val(dados.mae)
