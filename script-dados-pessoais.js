@@ -7,7 +7,7 @@ function consulta_cpf(cpf) {
         url: "https://formularios.proteina.digital/escale/consulta_cpf.php?cpf=" + cpf,
         type: 'get',
         // async: false,
-        timeout: 10000,
+        timeout: 5000,
         success: function (dados) {
             console.log(dados.erro)
             if (dados.erro === 'CPF inválido!') {
