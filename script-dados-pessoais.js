@@ -62,6 +62,8 @@ Webflow.push(function () {
     $('input[name="cpf"]').mask("000.000.000-00", { reverse: true });
     // $('input[name="rg"]').mask("00.000.000-0", { reverse: true });
     var RGMaskBehavior = function (val) {
+        console.log(val)
+        console.log(val.length)
         return val.replace(/\D/g, "").length === 8
             ? "00.000.000"
             : "00.000.000-0";
