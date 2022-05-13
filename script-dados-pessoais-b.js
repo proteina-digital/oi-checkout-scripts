@@ -11,7 +11,7 @@ Webflow.push(function () {
     // $('input[name="rg"]').mask("00.000.000-0", { reverse: true });
     var RGMaskBehavior = function (val) {
         return val.replace(/\D/g, "").length === 9
-            "00.000.000-0"    
+            ? "00.000.000-0"    
             : "00.000.000";
     },
         rgOptions = {
