@@ -205,7 +205,7 @@ Webflow.push(function () {
                     expre = val.length !== 11;
                     break;
                 case "rg":
-                    expre = val.length !== 9;
+                    expre = !/(\d{1,2}\.?)(\d{3}\.?)(\d{3})(\-?[0-9Xx]{1})/.test(val);
                     break;
                 case "data_nascimento":
                     expre = !/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i.test(item.val());
