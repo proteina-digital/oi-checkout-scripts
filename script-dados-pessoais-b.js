@@ -12,7 +12,7 @@ Webflow.push(function () {
     var RGMaskBehavior = function (val) {
         return val.replace(/\D/g, "").length === 9
             ? "00.000.000-0"    
-            : "00.000.000";
+            : "00.000.000-9";
     },
         rgOptions = {
             onKeyPress: function (val, e, field, options) {
