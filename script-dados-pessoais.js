@@ -60,7 +60,20 @@ Webflow.push(function () {
     });
 
     $('input[name="cpf"]').mask("000.000.000-00", { reverse: true });
-    $('input[name="rg"]').mask("00.000.000-0", { reverse: true });
+    // $('input[name="rg"]').mask("00.000.000-0", { reverse: true });
+    var RGMaskBehavior = function (val) {
+        return val.replace(/\D/g, "").length === 9
+            ? "00.000.000-0"
+            : "00.000.000";
+    },
+        rgOptions = {
+            onKeyPress: function (val, e, field, options) {
+                field.mask(RGMaskBehavior.apply({}, arguments), options);
+            },
+        };
+    $("input[name='rg']").mask(RGMaskBehavior, rgOptions);
+    
+    
     $('input[name="user_agent"]').val(navigator.userAgent);
     $("#finish_order").attr("disabled", true);
     $("#finish_order").val("CARREGANDO...");
