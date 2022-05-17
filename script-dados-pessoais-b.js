@@ -188,7 +188,7 @@ Webflow.push(function () {
     form.on("submit", function (e) {
         e.preventDefault(e);
 
-        var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='rg']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
+        var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
             let expre;
@@ -216,9 +216,6 @@ Webflow.push(function () {
                     break;
                 case "cpf":
                     expre = val.length !== 11;
-                    break;
-                case "rg":
-                    expre = !/(\d{1,2}\.?)(\d{3}\.?)(\d{3})(\-?[0-9Xx]{1})/.test(val);
                     break;
                 case "data_nascimento":
                     expre = !/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i.test(item.val());
