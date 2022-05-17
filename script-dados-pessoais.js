@@ -76,7 +76,7 @@ Webflow.push(function () {
         $("#finish_order").val("FINALIZAR");
     }, 5000);
 
-    $('input[name"email"]').change(function() {
+    $('input[name="email"]').change(function() {
         var input = $(this).val();
         if (input.length) {
             var input_clean = input.replace(/\D/g, '');
