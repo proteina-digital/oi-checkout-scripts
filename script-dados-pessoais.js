@@ -45,11 +45,44 @@ function consulta_cpf(cpf) {
     });
 }
 
+function envia_email(email) {
+    var telefone = sessionStorage.getItem('telefone_')
+    var segmentacao = sessionStorage.getItem('segmentacao')
+
+    $.ajax({
+        url: 'https://formularios.proteina.digital/escale/oi_checkout/abandono/enviar_email.php',
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/x-www-form-urlencoded',
+        // async: false,
+        data: {
+            email: email,
+            segmentacao: segmentacao,
+            telefone: telefone,
+        },
+        success: function(res){}, 
+         error: function(jqxhr, status, exception){
+            console.log(jqxhr);
+            console.log(status);
+            console.log(exception);
+         }
+    });
+}
+
+
 Webflow.push(function () {
     setTimeout(function () {
         $("#finish_order").removeAttr("disabled", true);
         $("#finish_order").val("FINALIZAR");
     }, 5000);
+
+    $('input[name"email"]').change(function() {
+        var input = $(this).val();
+        if (input.length) {
+            var input_clean = input.replace(/\D/g, '');
+            envia_email(input_clean);
+        }
+    })
 
     $('input[name="cpf"]').change(function () {
         var input = $(this).val();
