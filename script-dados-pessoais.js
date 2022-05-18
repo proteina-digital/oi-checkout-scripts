@@ -78,9 +78,9 @@ Webflow.push(function () {
 
     $('input[name="email"]').change(function() {
         var input = $(this).val();
+        console.log(input)
         if (input.length) {
-            var input_clean = input.replace(/\D/g, '');
-            envia_email(input_clean);
+            envia_email(input);
         }
     })
 
