@@ -78,7 +78,6 @@ Webflow.push(function () {
 
     $('input[name="email"]').change(function() {
         var input = $(this).val();
-        console.log(input)
         if (input.length) {
             envia_email(input);
         }
