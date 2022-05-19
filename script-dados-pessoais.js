@@ -87,6 +87,7 @@ Webflow.push(function () {
         var input = $(this).val();
         if (input.length) {
             var input_clean = input.replace(/\D/g, '');
+            sessionStorage.setItem('identifier', input_clean);
             consulta_cpf(input_clean);
         }
     });
