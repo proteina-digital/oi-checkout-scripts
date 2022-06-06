@@ -48,6 +48,7 @@ function consulta_cpf(cpf) {
 function envia_email(email) {
     var telefone = sessionStorage.getItem('telefone_')
     var segmentacao = sessionStorage.getItem('segmentacao')
+    var cidade_estado = sessionStorage.getItem('cidade_estado')
 
     $.ajax({
         url: 'https://formularios.proteina.digital/escale/oi_checkout/abandono/enviar_email.php',
@@ -59,6 +60,7 @@ function envia_email(email) {
             email: email,
             segmentacao: segmentacao,
             telefone: telefone,
+            cidade_estado: cidade_estado
         },
         success: function(res){}, 
          error: function(jqxhr, status, exception){
