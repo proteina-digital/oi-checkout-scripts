@@ -288,9 +288,11 @@ Webflow.push(function () {
             sessionStorage.setItem("form_input_" + input_name, item.val());
 
             switch (input_name) {
+                /*
                 case "nome_completo":
                     expre = !/^[a-zA-Z\s]*$/.test(item.val());
                     break;
+                */
                 case "celular":
                 case "outro_telefone":
                     expre = !telefone_validation(val);
