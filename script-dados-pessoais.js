@@ -23,7 +23,7 @@ function consulta_cpf(cpf) {
                 
                 alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
                 setTimeout(function() {
-                    $("input[name='nome_completo']").focus();
+                    document.querySelector("input[name='nome_completo']").focus();
                 }, 250)
                 return;
             } else {
@@ -42,7 +42,7 @@ function consulta_cpf(cpf) {
 
             alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
             setTimeout(function() {
-                $("input[name='nome_completo']").focus();
+                document.querySelector("input[name='nome_completo']").focus();
             }, 250)
             console.log(jqxhr);
             console.log(status);
