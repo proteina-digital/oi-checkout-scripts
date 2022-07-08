@@ -22,7 +22,9 @@ function consulta_cpf(cpf) {
                 $("input[name='data_nascimento']").parent().removeClass('hide')
                 
                 alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
-                $("input[name='nome_completo']").focus();
+                setTimeout(function() {
+                    $("input[name='nome_completo']").focus();
+                }, 250)
                 return;
             } else {
                 cpf_valido = true;
@@ -39,7 +41,9 @@ function consulta_cpf(cpf) {
             $("input[name='data_nascimento']").parent().removeClass('hide')
 
             alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
-            $("input[name='nome_completo']").focus();
+            setTimeout(function() {
+                $("input[name='nome_completo']").focus();
+            }, 250)
             console.log(jqxhr);
             console.log(status);
             console.log(exception);
