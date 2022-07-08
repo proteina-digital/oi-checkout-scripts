@@ -22,15 +22,17 @@ function consulta_cpf(cpf) {
                 $("input[name='data_nascimento']").parent().removeClass('hide')
                 
                 alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
-                $("input[name='nome_completo']").trigger("click");
-                $("input[name='nome_completo']").focus();
+                window.setTimeout(function () { 
+                    document.querySelector("input[name='nome_completo']") = "";
+                    document.querySelector("input[name='nome_completo']").focus(); 
+                }, 0); 
                 return;
             } else {
                 cpf_valido = true;
                 $("input[name='nome_completo']").val(dados.nome)
                 $("input[name='nome_mae']").val(dados.mae)
                 $("input[name='data_nascimento']").val(dados.nascimento)
-                return;
+                return false;
             }
         },
         error: function (jqxhr, status, exception) {
@@ -39,13 +41,16 @@ function consulta_cpf(cpf) {
             $("input[name='nome_mae']").parent().removeClass('hide')
             $("input[name='data_nascimento']").parent().removeClass('hide')
 
-            alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
-            $("input[name='nome_completo']").trigger("click");
-            $("input[name='nome_completo']").focus();
-
             console.log(jqxhr);
             console.log(status);
             console.log(exception);
+
+            alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
+            window.setTimeout(function () { 
+                document.querySelector("input[name='nome_completo']") = "";
+                document.querySelector("input[name='nome_completo']").focus(); 
+            }, 0); 
+            return false;
         }
     });
 }
