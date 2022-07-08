@@ -20,7 +20,8 @@ function consulta_cpf(cpf) {
                 $("input[name='nome_completo']").parent().removeClass('hide')
                 $("input[name='nome_mae']").parent().removeClass('hide')
                 $("input[name='data_nascimento']").parent().removeClass('hide')
-
+                
+                alert('Seu CPF não foi encontrado, iremos precisar que você insira algumas informações manualmente');
                 $("input[name='nome_completo']").focus();
                 return;
             } else {
