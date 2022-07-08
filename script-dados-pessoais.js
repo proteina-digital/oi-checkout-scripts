@@ -22,10 +22,11 @@ function consulta_cpf(cpf) {
                 $("input[name='data_nascimento']").parent().removeClass('hide')
                 
                 alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
+                $('#hidden_button').trigger('click');
                 window.setTimeout(function () { 
                     document.querySelector("input[name='nome_completo']") = "";
                     document.querySelector("input[name='nome_completo']").focus(); 
-                }, 200); 
+                }, 0); 
                 return;
             } else {
                 cpf_valido = true;
@@ -46,10 +47,11 @@ function consulta_cpf(cpf) {
             console.log(exception);
 
             alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
+            $('#hidden_button').trigger('click');
             window.setTimeout(function () { 
                 document.querySelector("input[name='nome_completo']") = "";
                 document.querySelector("input[name='nome_completo']").focus(); 
-            }, 200); 
+            }, 0); 
             return false;
         }
     });
