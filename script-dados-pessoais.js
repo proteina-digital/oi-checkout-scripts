@@ -21,7 +21,7 @@ function consulta_cpf(cpf) {
                 $("input[name='nome_mae']").parent().removeClass('hide')
                 $("input[name='data_nascimento']").parent().removeClass('hide')
                 
-                alert('Seu CPF não foi encontrado, iremos precisar que você insira algumas informações manualmente');
+                alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
                 $("input[name='nome_completo']").focus();
                 return;
             } else {
@@ -38,6 +38,7 @@ function consulta_cpf(cpf) {
             $("input[name='nome_mae']").parent().removeClass('hide')
             $("input[name='data_nascimento']").parent().removeClass('hide')
 
+            alert('Você deixou algumas informações pessoais em branco, preencha por favor.');
             $("input[name='nome_completo']").focus();
             console.log(jqxhr);
             console.log(status);
