@@ -25,7 +25,7 @@ function consulta_cpf(cpf) {
                 window.setTimeout(function () { 
                     document.querySelector("input[name='nome_completo']") = "";
                     document.querySelector("input[name='nome_completo']").focus(); 
-                }, 0); 
+                }, 200); 
                 return;
             } else {
                 cpf_valido = true;
@@ -49,7 +49,7 @@ function consulta_cpf(cpf) {
             window.setTimeout(function () { 
                 document.querySelector("input[name='nome_completo']") = "";
                 document.querySelector("input[name='nome_completo']").focus(); 
-            }, 0); 
+            }, 200); 
             return false;
         }
     });
