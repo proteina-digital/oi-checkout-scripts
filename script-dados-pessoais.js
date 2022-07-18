@@ -307,7 +307,7 @@ Webflow.push(function () {
                 */
                 case "celular":
                 case "outro_telefone":
-                    expre = !telefone_validation(val);
+                    expre = val !== "" || !telefone_validation(val);
                     break;
                 case "telefone_atual":
                     if (item.attr("required")) {
