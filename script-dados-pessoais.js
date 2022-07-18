@@ -306,8 +306,10 @@ Webflow.push(function () {
                     break;
                 */
                 case "celular":
+                    expre = !telefone_validation(val);
+                    break;
                 case "outro_telefone":
-                    expre = val !== "" || !telefone_validation(val);
+                    expre = val !== "" && !telefone_validation(val);
                     break;
                 case "telefone_atual":
                     if (item.attr("required")) {
