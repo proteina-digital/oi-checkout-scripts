@@ -103,6 +103,7 @@ Webflow.push(function () {
             var input_clean = input.replace(/\D/g, '');
             sessionStorage.setItem('identifier', input_clean);
             // consulta_cpf(input_clean);
+            cpf_valido = true;
         }
     });
 
