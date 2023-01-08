@@ -101,7 +101,10 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
         });
     }
 
-    $('[data-periodo-completo]').html(periodoDiaDaSemanaEl.text() + ',&ensp;dia ' + periodoDataTextoEl.text() + '<br> Periodo&ensp;' + periodo)
+	var agendamento_1_formatted = agendamento_data[0].split('-').reverse().join('/')
+	var agendamento_2_formatted = agendamento_data[1].split('-').reverse().join('/')
+
+    $('[data-periodo-completo]').html('Dia ' + agendamento_1_formatted + ' ou ' + agendamento_2_formatted + '<br> Periodo&ensp;' + periodo)
 }
 
 function carrega_feriados() {
