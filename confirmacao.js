@@ -8,6 +8,39 @@ var data_agendamento;
 
 var datas_agendamento = []
 
+function finish_order() {
+          const telefone = sessionStorage.getItem('telefone_')
+          const cep = sessionStorage.getItem('cep_')
+  
+          $.ajax({
+              url: 'https://formularios.proteina.digital/escale/oi_abandono.php',
+              dataType : "text",
+              type: 'post',
+              contentType: 'application/x-www-form-urlencoded',
+              data: {
+                  action: 'remove',
+                  cep: cep,
+                  telefone: telefone,
+                  receber_ligacao: 0,
+                  plano: 0
+              },
+              success: function(res){
+                  // console.log('sucesso')
+                  console.log("Phonemanager: ", res);
+                  if (res == 'Sucesso') {
+                      console.log("Contato removido da fila de abandono");
+                  }else{
+                      console.log("Contato não removido da fila de abandono");
+                  }
+               }, 
+               error: function(jqxhr, status, exception){
+                  console.log(jqxhr);
+                  console.log(status);
+                  console.log(exception);
+               }
+          })
+}
+
 function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
     if(agendamento_data.length != 2) {
         alert('Por favor escolha duas datas para possíveis para o agendamento da instalação!')
