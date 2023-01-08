@@ -87,6 +87,7 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
             // async: false,
             data: JSON.stringify({
                 periodo_id: periodo_id,
+                agendamento_data: agendamento_data[0],
                 agendamento_data_1: agendamento_data[0],
                 agendamento_data_2: agendamento_data[1],
                 identifier: identifier
