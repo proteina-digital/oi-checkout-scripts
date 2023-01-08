@@ -78,14 +78,6 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
         var identifier = sessionStorage.getItem('identifier')
         var segmentacao = sessionStorage.getItem('segmentacao')
 
-        console.log('oi')
-        console.log({
-                periodo_id: periodo_id,
-                agendamento_data_1: agendamento_data[0],
-                agendamento_data_2: agendamento_data[1],
-                identifier: identifier
-            })
-        return
 
         $.ajax({
             url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
@@ -209,9 +201,14 @@ Webflow.push(function () {
 
     if(datas_agendamento.length == 2) {
       datas_agendamento.shift()
-      $('.periodo').removeClass('hide')
     }
-    datas_agendamento.push(info.dateStr)    
+    datas_agendamento.push(info.dateStr)
+
+	// SE A LENGH FOR 2 APÓS O PUSH NO DATAS_AGENDAMENTO ENTÃO MOSTRA OS BOTÕES DE HORARIO
+	if (datas_agendamento.length == 2) {
+		periodoEl.removeClass('hide')
+	}
+
     fill_bicks()
     datas_agendamento.forEach(function(_data) {
         $('[data-date=' + _data + ']').css('background-color', '#009e0c')
