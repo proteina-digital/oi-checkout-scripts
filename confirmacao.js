@@ -241,7 +241,7 @@ Webflow.push(function () {
 
     if(periodo_selecionado.length > 0) {
         envia_dados_instalacao(periodo_selecionado.attr('data-periodo'), periodo_selecionado.attr('data-periodo-id'), datas_agendamento)
-  	    sessionStorage.clear();
+  	    // sessionStorage.clear();
     }
   })
 
