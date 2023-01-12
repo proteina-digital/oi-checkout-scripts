@@ -150,7 +150,8 @@ Webflow.push(function () {
     var identifier = sessionStorage.getItem('identifier')
     var segmentacao = sessionStorage.getItem('segmentacao')
     var periodo_id = sessionStorage.getItem('periodo_id')
-    var agendamento_data = sessionStorage.getItem('agendamento_data')
+    var agendamento_data_1 = sessionStorage.getItem('agendamento_data_1')
+    var agendamento_data_2 = sessionStorage.getItem('agendamento_data_2')
     $.ajax({
         url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
         dataType: 'text',
@@ -158,7 +159,9 @@ Webflow.push(function () {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
             periodo_id: periodo_id,
-            agendamento_data: agendamento_data,
+            agendamento_data: agendamento_data_1,
+            agendamento_data_1: agendamento_data_1,
+            agendamento_data_2: agendamento_data_2,
             identifier: identifier,
             plano: $this.attr('data-plano-id'),
             valor_plano: $this.attr('data-valor-plano')
