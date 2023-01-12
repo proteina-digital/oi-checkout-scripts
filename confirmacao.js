@@ -170,6 +170,7 @@ Webflow.push(function () {
         error: function (jqxhr, status, exception) {console.log(jqxhr); console.log(status);console.log(exception);}
     });
     $this.text('Seu upgrade foi realizado ✓')
+    sessionStorage.clear();
   })
 
   calendar.on("dateClick", function (info) {
