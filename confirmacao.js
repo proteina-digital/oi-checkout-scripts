@@ -79,26 +79,26 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
         var segmentacao = sessionStorage.getItem('segmentacao')
 
 
-        // $.ajax({
-        //     url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
-        //     dataType: 'text',
-        //     type: 'post',
-        //     contentType: "application/json; charset=utf-8",
-        //     // async: false,
-        //     data: JSON.stringify({
-        //         periodo_id: periodo_id,
-        //         agendamento_data: agendamento_data[0],
-        //         agendamento_data_1: agendamento_data[0],
-        //         agendamento_data_2: agendamento_data[1],
-        //         identifier: identifier
-        //     }),
-        //     success: function (res) { },
-        //     error: function (jqxhr, status, exception) {
-        //     console.log(jqxhr);
-        //     console.log(status);
-        //     console.log(exception);
-        //     }
-        // });
+        $.ajax({
+            url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
+            dataType: 'text',
+            type: 'post',
+            contentType: "application/json; charset=utf-8",
+            // async: false,
+            data: JSON.stringify({
+                periodo_id: periodo_id,
+                agendamento_data: agendamento_data[0],
+                agendamento_data_1: agendamento_data[0],
+                agendamento_data_2: agendamento_data[1],
+                identifier: identifier
+            }),
+            success: function (res) { },
+            error: function (jqxhr, status, exception) {
+            console.log(jqxhr);
+            console.log(status);
+            console.log(exception);
+            }
+        });
     }
 
 	var agendamento_1_formatted = agendamento_data[0].split('-').reverse().join('/')
