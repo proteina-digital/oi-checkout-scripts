@@ -53,13 +53,15 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
     sessionStorage.setItem('agendamento_data_1', agendamento_data[0])
     sessionStorage.setItem('agendamento_data_2', agendamento_data[1])
 
-    $combate1400mega = segmentacao === 'COMBATE1' && plano === '400 MB';
-    $combate2400mega = segmentacao === 'COMBATE2' && plano === '400 MB';
+    // $combate1400mega = segmentacao === 'COMBATE1' && plano === '400 MB';
+    // $combate2400mega = segmentacao === 'COMBATE2' && plano === '400 MB';
 
-    if($combate1400mega || $combate2400mega) {
+    if(false) {
+    // if($combate1400mega || $combate2400mega) {
         $('.pre-agendamento-200mega').removeClass('hide')
         $('#pre-agendamento-section').addClass('hide')
-    } else if (segmentacao === 'COMBATE3' && plano === '500 MB') {
+    } else if (false) {
+    // } else if (segmentacao === 'COMBATE3' && plano === '500 MB') {
         $('[data-acrescimo]').text('100')
         $('[data-megas]').text('1')
         $('[data-tipo-velocidade]').text('GIGA')
@@ -99,6 +101,13 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
             console.log(exception);
             }
         });
+
+        var site = window.location.origin;
+
+        sessionStorage.setItem('datas', JSON.stringify(agendamento_data));
+        sessionStorage.setItem('periodo', JSON.stringify(agendamento_data));
+
+        window.location.href = site + "/oi-play-tv" + window.location.search;
     }
 
 	var agendamento_1_formatted = agendamento_data[0].split('-').reverse().join('/')
