@@ -27,8 +27,8 @@ const segmentacoes_precos = [
     {
         nome: "combate3",
         produtos: [
-            { nome: 500, preco: "99,90", mais_vendido: false, popup: false, banner: true },
-            { nome: 600, preco: "109,90", mais_vendido: true, popup: true, banner: false },
+            { nome: 500, preco: "99,90", mais_vendido: false, popup: false, banner: false },
+            { nome: 600, preco: "109,90", mais_vendido: true, popup: true, banner: true },
             { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false },
         ],
     },
