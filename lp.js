@@ -15,6 +15,7 @@ Webflow.push(function () {
   })
 
   $('[data-open-search]').on("click", function() {
+    console.log('oi')
     $('.modal-cidades').css('display', 'flex')
   })
 })
