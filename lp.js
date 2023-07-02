@@ -1,5 +1,5 @@
 Webflow.push(function () {
-
+console.log('debug')
   $("[data-search-cidade]").on("input", function () {
     var value = $(this).val(); var matches = [];
     if (value) {
