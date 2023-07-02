@@ -42,23 +42,25 @@ Webflow.push(function () {
     db = _format_db(db)
   }
 
-  if (sessionStorage.getItem('segmentacao')) {
-    var match = false
-    var current_segmentacao = sessionStorage.getItem('segmentacao').replaceAll('_', ' ')
-    current_segmentacao = current_segmentacao.split('-')
-    nome_cidade = current_segmentacao[0].replaceAll(' De ', ' de ').toLowerCase()
-    db.find(function (estado) {
+  setTimeout(function() {
+    if (sessionStorage.getItem('segmentacao')) {
+      var match = false
+      var current_segmentacao = sessionStorage.getItem('segmentacao').replaceAll('_', ' ')
+      current_segmentacao = current_segmentacao.split('-')
+      nome_cidade = current_segmentacao[0].replaceAll(' De ', ' de ').toLowerCase()
+      db.find(function (estado) {
 
-      estado.cidades.find(function (est_cidade) {
-        if (est_cidade.cidade.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == nome_cidade) {
-          nome_cidade = est_cidade.cidade
-          match = true
-        }
+        estado.cidades.find(function (est_cidade) {
+          if (est_cidade.cidade.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == nome_cidade) {
+            nome_cidade = est_cidade.cidade
+            match = true
+          }
+        })
       })
-    })
 
-    $('[data-open-search]').text([nome_cidade, current_segmentacao[1]].join(', '));
-  }
+      $('[data-open-search]').text([nome_cidade, current_segmentacao[1]].join(', '));
+    }
+  }, 500)
 
   const capitais = [
     'Salvador, BA',
