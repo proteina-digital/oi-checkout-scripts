@@ -25,15 +25,15 @@ function _format_db(_db) {
     return db_formatted
 }
 
-$(window).on('storage', function (e) {
-    if (e.originalEvent.storageArea === sessionStorage) {
-        setup_cidades()
-    }
-});
+// $(window).on('storage', function (e) {
+//     if (e.originalEvent.storageArea === sessionStorage) {
+//         setup_cidades()
+//     }
+// });
 
 function setup_cidades() {
-    if(!sessionStorage.getItem('segmentacao')) return
-    
+    if (!sessionStorage.getItem('segmentacao')) return
+
     var match = false
     var current_segmentacao = sessionStorage.getItem('segmentacao').replaceAll('_', ' ')
     current_segmentacao = current_segmentacao.split('-')
@@ -67,10 +67,6 @@ Webflow.push(function () {
     }
 
     setTimeout(function () {
-        if (!sessionStorage.getItem('segmentacao')) {
-            sessionStorage.setItem('segmentacao', 'RIO_DE_JANEIRO-RJ')
-        }
-
         setup_cidades()
     }, 200)
 
