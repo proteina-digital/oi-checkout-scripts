@@ -65,6 +65,7 @@ Webflow.push(function () {
     } else {
         db = JSON.parse(sessionStorage.getItem('DB'))
         db = _format_db(db)
+        setup_cidades()
     }
 
     const capitais = [
