@@ -59,16 +59,13 @@ Webflow.push(function () {
                 db = json
                 db = _format_db(db)
                 sessionStorage.setItem('DB', JSON.stringify(json))
+                setup_cidades()
             })
         })
     } else {
         db = JSON.parse(sessionStorage.getItem('DB'))
         db = _format_db(db)
     }
-
-    setTimeout(function () {
-        setup_cidades()
-    }, 200)
 
     const capitais = [
         'Salvador, BA',
