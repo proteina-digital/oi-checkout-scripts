@@ -25,7 +25,31 @@ function _format_db(_db) {
     return db_formatted
 }
 
+$(window).on('storage', function (e) {
+    if (e.originalEvent.storageArea === sessionStorage) {
+        setup_cidades()
+    }
+});
 
+function setup_cidades() {
+    if(!sessionStorage.getItem('segmentacao')) return
+    
+    var match = false
+    var current_segmentacao = sessionStorage.getItem('segmentacao').replaceAll('_', ' ')
+    current_segmentacao = current_segmentacao.split('-')
+    nome_cidade = current_segmentacao[0].replaceAll(' De ', ' de ').toLowerCase()
+    db.find(function (estado) {
+
+        estado.cidades.find(function (est_cidade) {
+            if (est_cidade.cidade.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == nome_cidade) {
+                nome_cidade = est_cidade.cidade
+                match = true
+            }
+        })
+    })
+    $('[data-open-search]').text([nome_cidade, current_segmentacao[1]].join(', '));
+
+}
 
 Webflow.push(function () {
 
@@ -46,28 +70,9 @@ Webflow.push(function () {
         if (!sessionStorage.getItem('segmentacao')) {
             sessionStorage.setItem('segmentacao', 'RIO_DE_JANEIRO-RJ')
         }
+
+        setup_cidades()
     }, 200)
-
-
-    $(window).on('storage', function (e) {
-        if (e.originalEvent.storageArea === sessionStorage) {
-            var match = false
-            var current_segmentacao = sessionStorage.getItem('segmentacao').replaceAll('_', ' ')
-            current_segmentacao = current_segmentacao.split('-')
-            nome_cidade = current_segmentacao[0].replaceAll(' De ', ' de ').toLowerCase()
-            db.find(function (estado) {
-
-                estado.cidades.find(function (est_cidade) {
-                    if (est_cidade.cidade.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") == nome_cidade) {
-                        nome_cidade = est_cidade.cidade
-                        match = true
-                    }
-                })
-            })
-            $('[data-open-search]').text([nome_cidade, current_segmentacao[1]].join(', '));
-
-        }
-    });
 
     const capitais = [
         'Salvador, BA',
