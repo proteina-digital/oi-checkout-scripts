@@ -47,8 +47,8 @@ function setup_cidades() {
             }
         })
     })
-    $('[data-open-search]').text([nome_cidade, current_segmentacao[1]].join(', '));
-
+    var cidade = [nome_cidade, current_segmentacao[1]].join(', ');
+    $('[data-open-search]').html(cidade + '<span class="text-span-21">⌄</span>');
 }
 
 Webflow.push(function () {
@@ -141,6 +141,6 @@ Webflow.push(function () {
         }
 
         $('[data-close-search]').trigger('click')
-        $('[data-open-search]').text(cidade);
+        $('[data-open-search]').html(cidade + '<span class="text-span-21">⌄</span>');
     });
 })
