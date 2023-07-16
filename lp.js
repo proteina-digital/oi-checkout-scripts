@@ -141,6 +141,6 @@ Webflow.push(function () {
         }
 
         $('[data-close-search]').trigger('click')
-        $('[data-open-search]').html(cidade + '<span class="text-span-21">⌄</span>');
+        $('[data-open-search]').html(cidade);
     });
 })
