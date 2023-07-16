@@ -48,7 +48,7 @@ function setup_cidades() {
         })
     })
     var cidade = [nome_cidade, current_segmentacao[1]].join(', ');
-    $('[data-open-search]').html(cidade + '<span class="text-span-21">⌄</span>');
+    $('[data-open-search]').html(cidade);
 }
 
 Webflow.push(function () {
