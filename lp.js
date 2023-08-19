@@ -130,17 +130,74 @@ Webflow.push(function () {
     });
 
     $(document).on('click', 'li.cidade-li', function () {
-        var cidade = $(this).text();
-        var segmentacao = cidade.toUpperCase().replaceAll(', ', '-').replaceAll(' ', '_')
-        segmentacao = segmentacao.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    var cidade_titulo = $(this).text(), cidade = '', estado = '';
 
-        if (segmentacoes[segmentacao]) {
-            atualiza_cards_por_segmentacao2(segmentacao)
-        } else {
-            atualiza_cards_por_segmentacao2('RIO_DE_JANEIRO-RJ')
+    if(cidade_titulo) {
+        var segmentacao = cidade_titulo.split(', ')[0],
+        cidade = segmentacao[0],
+        estado = segmentacao[1] 
+    }
+
+    $('[data-close-search]').trigger('click')
+    $('[data-open-search]').html(cidade_titulo);
+
+    on_select_city(cidade, estado);
+});
+
+function on_select_city(cidade, estado) {
+
+    $.ajax({
+        url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/x-www-form-urlencoded',
+        async: false,
+        data: {
+            cidade: cidade,
+            estado: estado,
+        },
+        success: function (res) {
+            var json = JSON.parse(res)
+
+            monta_planos_v1(json)
+
+            Webflow.require('slider').redraw()
+        },
+        error: function (jqxhr, status, exception) {
+            console.log(jqxhr);
+            console.log(status);
+            console.log(exception);
+
+            $('[data-select-cities]').hide();
         }
-
-        $('[data-close-search]').trigger('click')
-        $('[data-open-search]').html(cidade);
     });
+}
+
+function monta_planos_v1(planos) {
+
+    console.log(planos);
+    
+    planos.forEach(function(plano) {
+        var sku = plano.sku,
+            preco = plano.salePriceFormatted.replaceAll('R$ ', '').replaceAll(',90', ''),
+            card = $("[data-sku='" + sku + "']"),
+            wslide = $(this).closest('.w-slide');
+
+
+        if(card) {
+            card.find('[data-preco]').text(preco);
+            if(isMobile()) {
+                wslide.appendTo(".cards-slider");
+                wslide.attr("data-disabled", 'disabled');
+                $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
+            }
+        } else {
+            card.hide();
+        }
+    });
+}
+
+function isMobile() {
+    return $(window).width() < 768
+}
 })
