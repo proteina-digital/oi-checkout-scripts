@@ -141,6 +141,7 @@ Webflow.push(function () {
         $('[data-close-search]').trigger('click')
         $('[data-open-search]').html(cidade_titulo);
 
+         $('.loading-spinner').css('display', 'flex')
         on_select_city(cidade, estado);
     });
 })
@@ -163,12 +164,14 @@ function on_select_city(cidade, estado) {
             monta_planos_v1(json.planos)
 
             Webflow.require('slider').redraw()
+            $('.loading-spinner').css('display', 'none')
+
         },
         error: function (jqxhr, status, exception) {
             console.log(jqxhr);
             console.log(status);
             console.log(exception);
-
+            $('.loading-spinner').css('display', 'none')
             $('[data-select-cities]').hide();
         }
     });
