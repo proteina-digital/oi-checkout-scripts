@@ -1,3 +1,14 @@
+Webflow.push(function() {
+  var segmentacao = sessionStorage.getItem('segmentacao')
+  var _cidade = 'Rio de Janeiro', _estado = 'RJ';
+  if(segmentacao) {
+    _cidade = segmentacao.split('-')[0]
+    _estado = segmentacao.split('-')[1]
+  }
+  
+  on_select_city(_cidade, _estado);
+})
+
 function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
