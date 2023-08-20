@@ -130,74 +130,127 @@ Webflow.push(function () {
     });
 
     $(document).on('click', 'li.cidade-li', function () {
-    var cidade_titulo = $(this).text(), cidade = '', estado = '';
+        var cidade_titulo = $(this).text(), cidade = '', estado = '';
 
-    if(cidade_titulo) {
-        var segmentacao = cidade_titulo.split(', ')[0],
-        cidade = segmentacao[0],
-        estado = segmentacao[1] 
+        if (cidade_titulo) {
+            var segmentacao = cidade_titulo.split(', ')[0],
+                cidade = segmentacao[0],
+                estado = segmentacao[1]
+        }
+
+        $('[data-close-search]').trigger('click')
+        $('[data-open-search]').html(cidade_titulo);
+
+        on_select_city(cidade, estado);
+    });
+
+    function on_select_city(cidade, estado) {
+
+        $.ajax({
+            url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
+            dataType: 'text',
+            type: 'post',
+            contentType: 'application/x-www-form-urlencoded',
+            async: false,
+            data: {
+                cidade: cidade,
+                estado: estado,
+            },
+            success: function (res) {
+                var json = JSON.parse(res)
+
+                monta_planos_v1(json.planos)
+
+                Webflow.require('slider').redraw()
+            },
+            error: function (jqxhr, status, exception) {
+                console.log(jqxhr);
+                console.log(status);
+                console.log(exception);
+
+                $('[data-select-cities]').hide();
+            }
+        });
     }
 
-    $('[data-close-search]').trigger('click')
-    $('[data-open-search]').html(cidade_titulo);
+    function monta_planos_v1(planos) {
 
-    on_select_city(cidade, estado);
-});
+        console.log(planos);
 
-function on_select_city(cidade, estado) {
+        $('[data-card]').each(function() {
+            var sku = $(this).attr('data-sku');
+            var found = planos.find(element => element.sku == sku);
+            var wslide = $(this).closest('.w-slide');
 
-    $.ajax({
-        url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
-        dataType: 'text',
-        type: 'post',
-        contentType: 'application/x-www-form-urlencoded',
-        async: false,
-        data: {
-            cidade: cidade,
-            estado: estado,
-        },
-        success: function (res) {
-            var json = JSON.parse(res)
-
-            monta_planos_v1(json)
-
-            Webflow.require('slider').redraw()
-        },
-        error: function (jqxhr, status, exception) {
-            console.log(jqxhr);
-            console.log(status);
-            console.log(exception);
-
-            $('[data-select-cities]').hide();
-        }
-    });
-}
-
-function monta_planos_v1(planos) {
-
-    console.log(planos);
-    
-    planos.forEach(function(plano) {
-        var sku = plano.sku,
-            preco = plano.salePriceFormatted.replaceAll('R$ ', '').replaceAll(',90', ''),
-            card = $("[data-sku='" + sku + "']"),
-            wslide = $(this).closest('.w-slide');
-
-
-        if(card) {
-            card.find('[data-preco]').text(preco);
-            if(isMobile()) {
-                wslide.appendTo(".cards-slider");
-                wslide.attr("data-disabled", 'disabled');
-                $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
+            if(!found) {
+                $(this).hide();
+                if(isMobile()) {
+                  wslide.appendTo(".cards-slider");
+                  wslide.attr("data-disabled", 'disabled');
+                  // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
+                }
+            } else {
+                $(this).show();
+                if(isMobile()) {
+                  if(wslide.parent().hasClass('cards-slider')) {
+                    var $origin = '#' + wslide.attr('data-origin');
+                    wslide.appendTo($origin);
+                  }
+                  wslide.removeAttr('data-disabled') 
+                }
             }
-        } else {
-            card.hide();
-        }
-    });
-}
 
-function isMobile() {
-    return $(window).width() < 768
-}
+        })
+
+        planos.forEach(function (plano_atual) {
+            var sku = plano_atual.sku,
+                preco = plano_atual.salePriceFormatted.replaceAll('R$ ', '').replaceAll(',90', ''),
+                card = $("[data-sku='" + sku + "']"),
+                wslide = $(this).closest('.w-slide');
+
+            var card = $("[data-sku='" + sku + "']");
+
+            // caso seja 500 mega, é plano destaque, caso não, removo todos os estilos que podem ter sido aplicados anteriormente
+            if (sku == 709) {
+                card_destaque = card;
+                card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
+                card.css('background', "#525252");
+                card.css('color', '#fff');
+                card.find('.image-icon-card-2').css('display', 'block');
+                card.find('.image-icon-card').css('display', 'none');
+            } else {
+                card.remove('#flag-mais-vendido')
+                card.css('background', "#fff");
+                card.css('color', "#333");
+                card.find('.image-icon-card').css('display', 'block');
+                card.find('.image-icon-card-2').css('display', 'none');
+
+                // estilos banner
+                $('.section-banner [data-link-banner]').each(function () {
+                    var link_banner = $(this)
+                    link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
+                    link_banner.attr('data-megas', plano_atual.nome + 'mb');
+                });
+                $('.section-banner [data-mb-banner]').text(plano_atual.nome);
+                $('.section-banner [data-preco-banner]').text(plano_atual.salePrice.toString().split(',')[0]);
+
+                // estilos popup
+                $('#modal-abandono [data-link-banner]').each(function () {
+                    const link_popup = $(this)
+                    link_popup.attr('href', replaceUrlParam(link_popup.attr('href'), 'plano', plano_atual.nome + 'mb'));
+                    link_popup.attr('data-megas', plano_atual.nome + 'mb');
+                });
+
+                $('#modal-abandono [data-mb-banner]').text(plano_atual.nome);
+                $('#modal-abandono [data-preco-modal]').text(plano_atual.salePrice.toString().split(',')[0]);
+
+                card.find('[data-preco]').text(plano_atual.salePrice.toString().split(',')[0]);
+                card.find('[data-plano]').attr('data-valor-plano', plano_atual.salePrice.toString());
+            }
+        });
+    }
+
+    function isMobile() {
+        return $(window).width() < 768
+    }
 })
