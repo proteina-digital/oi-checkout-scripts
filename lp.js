@@ -9,6 +9,10 @@ function titleCase(str) {
   return splitStr.join(' ');
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 var db;
 
 function _format_db(_db) {
@@ -133,10 +137,10 @@ Webflow.push(function () {
       var cidade_titulo = $(this).text(), cidade = '', estado = '';
 
       if (cidade_titulo) {
-          var segmentacao = cidade_titulo.split(', ')[0],
+          var segmentacao = cidade_titulo.split(', '),
               cidade = segmentacao[0],
               estado = segmentacao[1]
-      }
+        }
 
       $('[data-close-search]').trigger('click')
       $('[data-open-search]').html(cidade_titulo);
@@ -147,7 +151,6 @@ Webflow.push(function () {
 })
 
 function on_select_city(cidade, estado) {
-
   $.ajax({
       url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
       dataType: 'text',
@@ -175,8 +178,6 @@ function on_select_city(cidade, estado) {
 }
 
 function monta_planos_v1(planos) {
-
-  console.log(planos);
 
   $('[data-card]').each(function() {
       var sku = $(this).attr('data-sku');
