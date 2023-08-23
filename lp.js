@@ -145,7 +145,6 @@ Webflow.push(function () {
       $('[data-close-search]').trigger('click')
       $('[data-open-search]').html(cidade_titulo);
 
-       $('.loading-spinner').css('display', 'flex')
       on_select_city(cidade, estado);
   });
 })
@@ -160,6 +159,11 @@ function on_select_city(cidade, estado) {
       data: {
           cidade: cidade,
           estado: estado,
+      },
+      beforeSend: function() {
+       $('.loading-spinner').css('display', 'flex')
+        $('.modal-cidades').hide();
+
       },
       success: function (res) {
           var json = JSON.parse(res)
