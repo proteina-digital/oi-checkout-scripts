@@ -210,7 +210,7 @@ function monta_planos_v1(planos) {
 
   planos.forEach(function (plano_atual) {
       var sku = plano_atual.sku,
-          preco = plano_atual.salePriceFormatted.replaceAll('R$ ', '').replaceAll(',90', ''),
+          preco = plano_atual.salePriceFormatted.replaceAll('R$', '').replaceAll(' ', '').replaceAll(',90', ''),
           card = $("[data-sku='" + sku + "']"),
           wslide = $(this).closest('.w-slide');
 
