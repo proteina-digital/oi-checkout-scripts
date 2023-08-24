@@ -238,7 +238,8 @@ function monta_planos_v1(planos) {
               link_banner.attr('data-megas', plano_atual.nome + 'mb');
           });
           $('.section-banner [data-mb-banner]').text(plano_atual.nome);
-          $('.section-banner [data-preco-banner]').text(plano_atual.salePrice.toString().split(',')[0]);
+        //   $('.section-banner [data-preco-banner]').text(plano_atual.salePrice.toString().split(',')[0]);
+          $('.section-banner [data-preco-banner]').text(preco);
 
           // estilos popup
           $('#modal-abandono [data-link-banner]').each(function () {
@@ -248,9 +249,9 @@ function monta_planos_v1(planos) {
           });
 
           $('#modal-abandono [data-mb-banner]').text(plano_atual.nome);
-          $('#modal-abandono [data-preco-modal]').text(plano_atual.salePrice.toString().split(',')[0]);
+          $('#modal-abandono [data-preco-modal]').text(preco);
 
-          card.find('[data-preco]').text(plano_atual.salePrice.toString().split(',')[0]);
+          card.find('[data-preco]').text(preco);
           card.find('[data-plano]').attr('data-valor-plano', plano_atual.salePrice.toString());
       }
   });
