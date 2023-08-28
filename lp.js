@@ -153,30 +153,29 @@ Webflow.push(function () {
 })
 
 function on_select_city(cidade, estado) {
-  $.ajax({
-      url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
-      dataType: 'text',
-      type: 'post',
-      contentType: 'application/x-www-form-urlencoded',
-      async: false,
-      data: {
-          cidade: cidade,
-          estado: estado,
-      },
-      success: function (res) {
-          var json = JSON.parse(res)
-          monta_planos_v1(json.planos)
-          Webflow.require('slider').redraw()
-          $('.loading-spinner').css('display', 'none')
-      },
-      error: function (jqxhr, status, exception) {
-          console.log(jqxhr);
-          console.log(status);
-          console.log(exception);
-          $('.modal-cidades').css('display', 'none')
-          $('.loading-spinner').css('display', 'none')
-      }
-  });
+    $.ajax({
+        url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
+        dataType: 'text',
+        type: 'post',
+        contentType: 'application/x-www-form-urlencoded',
+        data: {
+            cidade: cidade,
+            estado: estado,
+        },
+        success: function (res) {
+            var json = JSON.parse(res)
+            monta_planos_v1(json.planos)
+            Webflow.require('slider').redraw()
+            $('.loading-spinner').css('display', 'none')
+        },
+        error: function (jqxhr, status, exception) {
+            console.log(jqxhr);
+            console.log(status);
+            console.log(exception);
+            $('.modal-cidades').css('display', 'none')
+            $('.loading-spinner').css('display', 'none')
+        }
+    });
 }
 
 function monta_planos_v1(planos) {
