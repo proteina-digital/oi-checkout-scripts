@@ -148,7 +148,7 @@ Webflow.push(function () {
       $('.loading-spinner').css('display', 'flex')
       $('.modal-cidades').css('display', 'none')
 
-    //   on_select_city(cidade, estado);
+      on_select_city(cidade, estado);
   });
 })
 
@@ -173,7 +173,7 @@ function on_select_city(cidade, estado) {
           console.log(jqxhr);
           console.log(status);
           console.log(exception);
-        $('.modal-cidades').css('display', 'none')
+          $('.modal-cidades').css('display', 'none')
           $('.loading-spinner').css('display', 'none')
       }
   });
