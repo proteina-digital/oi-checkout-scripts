@@ -145,15 +145,12 @@ Webflow.push(function () {
       $('[data-close-search]').trigger('click')
       $('[data-open-search]').html(cidade_titulo);
 
-      $('.loading-spinner').css('display', 'flex')
-      $('.modal-cidades').hide();
-
       on_select_city(cidade, estado);
   });
 })
 
 function on_select_city(cidade, estado) {
-    $.ajax({
+  $.ajax({
       url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
       dataType: 'text',
       type: 'post',
@@ -163,18 +160,21 @@ function on_select_city(cidade, estado) {
           cidade: cidade,
           estado: estado,
       },
+      beforeSend: function() {
+        $('.loading-spinner').css('display', 'flex')
+        $('.modal-cidades').css('display', 'none')
+      },
       success: function (res) {
           var json = JSON.parse(res)
           monta_planos_v1(json.planos)
           Webflow.require('slider').redraw()
           $('.loading-spinner').css('display', 'none')
-          $('.modal-cidades').hide();
-        },
+      },
       error: function (jqxhr, status, exception) {
           console.log(jqxhr);
           console.log(status);
           console.log(exception);
-          $('.modal-cidades').hide();
+          $('[data-select-cities]').hide();
           $('.loading-spinner').css('display', 'none')
       }
   });
