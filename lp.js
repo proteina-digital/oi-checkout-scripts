@@ -145,14 +145,14 @@ Webflow.push(function () {
       $('[data-close-search]').trigger('click')
       $('[data-open-search]').html(cidade_titulo);
 
-      on_select_city(cidade, estado);
+      $('.loading-spinner').css('display', 'flex')
+      $('.modal-cidades').css('display', 'none')
+
+    //   on_select_city(cidade, estado);
   });
 })
 
 function on_select_city(cidade, estado) {
-    $('.loading-spinner').css('display', 'flex')
-    $('.modal-cidades').css('display', 'none')
-
   $.ajax({
       url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
       dataType: 'text',
