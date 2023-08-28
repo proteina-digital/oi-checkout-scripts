@@ -150,6 +150,9 @@ Webflow.push(function () {
 })
 
 function on_select_city(cidade, estado) {
+    $('.loading-spinner').css('display', 'flex')
+    $('.modal-cidades').css('display', 'none')
+
   $.ajax({
       url: 'https://formularios.proteina.digital/escale/oi_checkout/get_planos_por_cidade.php',
       dataType: 'text',
@@ -159,10 +162,6 @@ function on_select_city(cidade, estado) {
       data: {
           cidade: cidade,
           estado: estado,
-      },
-      beforeSend: function() {
-        $('.loading-spinner').css('display', 'flex')
-        $('.modal-cidades').css('display', 'none')
       },
       success: function (res) {
           var json = JSON.parse(res)
@@ -174,7 +173,7 @@ function on_select_city(cidade, estado) {
           console.log(jqxhr);
           console.log(status);
           console.log(exception);
-          $('[data-select-cities]').hide();
+        $('.modal-cidades').css('display', 'none')
           $('.loading-spinner').css('display', 'none')
       }
   });
