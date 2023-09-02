@@ -209,7 +209,6 @@ function monta_planos_v1(planos) {
 
   })
 
-
   planos.forEach(function (plano_atual) {
       var sku = plano_atual.sku,
           preco = plano_atual.salePriceFormatted.replaceAll('R$', '').replaceAll(' ', '').replaceAll(',90', ''),
@@ -256,11 +255,12 @@ function monta_planos_v1(planos) {
       }
   });
 
-  // 
-  var tab_telefone = $('[data-with-telefone]')
+
+ var tab_telefone = $('[data-with-telefone]')
   var tab_oiplay = $('[data-with-oiplay]')
 
-  tab_telefone.find('[data-plano-sku]').each(function() {
+
+  tab_telefone.each(function() {
     var card = $(this)
     var preco = card.find('[data-preco]')
     var centavos = preco.next()
@@ -269,12 +269,13 @@ function monta_planos_v1(planos) {
     preco_completo = preco_completo.toFixed(2).replace('.', ',')
     var arr_preco = preco_completo.split(',')
 
+
     preco.text(arr_preco[0])
     preco.next().html(',' + arr_preco[1] + '<br/>/mês')
   })
 
-    tab_oiplay.find('[data-plano-sku]').each(function() {
-      var card = $(this)
+    tab_oiplay.each(function() {
+       var card = $(this)
       var preco = card.find('[data-preco]')
       var centavos = preco.next()
 
@@ -282,29 +283,36 @@ function monta_planos_v1(planos) {
       preco_completo = preco_completo.toFixed(2).replace('.', ',')
       var arr_preco = preco_completo.split(',')
 
+
       preco.text(arr_preco[0])
       preco.next().html(',' + arr_preco[1] + '<br/>/mês')
     })
 
-  $('data-with').on('click', function() {
+  
+  $('[data-with]').on('click', function() {
     var current_plano_type = $(this).attr('data-with')
 
+    $('[data-with]').removeClass('active');
+    $(this).addClass('active')
 
-    switch (expr) {
+    switch (current_plano_type) {
       case 'fibra':
-        $('[data-with-fibra]').show();
-        $('[data-with-telefone]').hide();
-        $('[data-with-oiplay]').hide();
+        $('[data-with-fibra]').removeClass('hide');
+        $('[data-with-telefone]').addClass('hide');
+        $('[data-with-oiplay]').addClass('hide');
+        $('[data-contratar-online]').show();
         break;
       case 'fixo':
-        $('[data-with-fibra]').hide();
-        $('[data-with-telefone]').show();
-        $('[data-with-oiplay]').hide();
+        $('[data-with-fibra]').addClass('hide');
+        $('[data-with-telefone]').removeClass('hide');
+        $('[data-with-oiplay]').addClass('hide');
+        $('[data-contratar-online]').hide();
         break;
       case 'oiplay':
-        $('[data-with-fibra]').hide();
-        $('[data-with-telefone]').hide();
-        $('[data-with-oiplay]').show();
+        $('[data-with-fibra]').addClass('hide');
+        $('[data-with-telefone]').addClass('hide');
+        $('[data-with-oiplay]').removeClass('hide');
+        $('[data-contratar-online]').hide();
         break;        
       default:
         break;
