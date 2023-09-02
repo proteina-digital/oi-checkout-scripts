@@ -181,16 +181,23 @@ function on_select_city(cidade, estado) {
 
 
 function monta_planos_v1(planos) {
-
+  console.log(planos)
   $('[data-plano-sku]').each(function() {
       var sku = $(this).attr('data-plano-sku');
-      var found = planos.find(element => element.id == sku);
+      // var found = planos.find(element => element.id == sku);
+      var found = planos.find(function(element) {
+        console.log('----------------------------------')
+        console.log('element', element)
+        console.log('sku', sku);
+        console.log('sku found', sku, sku == element.id)
+        console.log('----------------------------------')
+        return element.id == sku
+      })
       var wslide = $(this).closest('.w-slide');
 
       if(!found) {
           $(this).hide();
           if(isMobile()) {
-            console.log(wslide.parent())
             Webflow.require('slider').redraw()
             wslide.appendTo(".cards-slider");
             wslide.attr("data-disabled", 'disabled');
