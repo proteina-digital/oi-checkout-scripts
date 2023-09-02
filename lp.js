@@ -285,6 +285,32 @@ function monta_planos_v1(planos) {
       preco.text(arr_preco[0])
       preco.next().html(',' + arr_preco[1] + '<br/>/mês')
     })
+
+  $('data-with').on('click', function() {
+    var current_plano_type = $(this).attr('data-with')
+
+
+    switch (expr) {
+      case 'fibra':
+        $('[data-with-fibra]').show();
+        $('[data-with-telefone]').hide();
+        $('[data-with-oiplay]').hide();
+        break;
+      case 'fixo':
+        $('[data-with-fibra]').hide();
+        $('[data-with-telefone]').show();
+        $('[data-with-oiplay]').hide();
+        break;
+      case 'oiplay':
+        $('[data-with-fibra]').hide();
+        $('[data-with-telefone]').hide();
+        $('[data-with-oiplay]').show();
+        break;        
+      default:
+        break;
+    }
+
+  })
 }
 
 function isMobile() {
