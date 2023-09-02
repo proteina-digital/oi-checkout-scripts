@@ -178,19 +178,22 @@ function on_select_city(cidade, estado) {
     });
 }
 
+
+
 function monta_planos_v1(planos) {
 
-  $('[data-card]').each(function() {
-      var sku = $(this).attr('data-sku');
-      var found = planos.find(element => element.sku == sku);
+  $('[data-plano-sku]').each(function() {
+      var sku = $(this).attr('data-plano-sku');
+      var found = planos.find(element => element.id == sku);
       var wslide = $(this).closest('.w-slide');
 
       if(!found) {
           $(this).hide();
           if(isMobile()) {
+            console.log(wslide.parent())
+            Webflow.require('slider').redraw()
             wslide.appendTo(".cards-slider");
             wslide.attr("data-disabled", 'disabled');
-            // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
           }
       } else {
           $(this).show();
@@ -205,13 +208,12 @@ function monta_planos_v1(planos) {
 
   })
 
+
   planos.forEach(function (plano_atual) {
       var sku = plano_atual.sku,
           preco = plano_atual.salePriceFormatted.replaceAll('R$', '').replaceAll(' ', '').replaceAll(',90', ''),
-          card = $("[data-sku='" + sku + "']"),
+          card = $("[data-plano-sku='" + plano_atual.id + "']"),
           wslide = $(this).closest('.w-slide');
-
-      var card = $("[data-sku='" + sku + "']");
 
       // caso seja 500 mega, é plano destaque, caso não, removo todos os estilos que podem ter sido aplicados anteriormente
       if (sku == 709) {
@@ -252,6 +254,36 @@ function monta_planos_v1(planos) {
           card.find('[data-plano]').attr('data-valor-plano', plano_atual.salePrice.toString());
       }
   });
+
+  // 
+  var tab_telefone = $('[data-with-telefone]')
+  var tab_oiplay = $('[data-with-oiplay]')
+
+  tab_telefone.find('[data-plano-sku]').each(function() {
+    var card = $(this)
+    var preco = card.find('[data-preco]')
+    var centavos = preco.next()
+
+    var preco_completo = parseFloat((preco.text() + centavos.text()).replace(',', '.').replace(/[^\d.-]/g, '')) + 29.90;
+    preco_completo = preco_completo.toFixed(2).replace('.', ',')
+    var arr_preco = preco_completo.split(',')
+
+    preco.text(arr_preco[0])
+    preco.next().html(',' + arr_preco[1] + '<br/>/mês')
+  })
+
+    tab_oiplay.find('[data-plano-sku]').each(function() {
+      var card = $(this)
+      var preco = card.find('[data-preco]')
+      var centavos = preco.next()
+
+      var preco_completo = parseFloat((preco.text() + centavos.text()).replace(',', '.').replace(/[^\d.-]/g, '')) + 69.90;
+      preco_completo = preco_completo.toFixed(2).replace('.', ',')
+      var arr_preco = preco_completo.split(',')
+
+      preco.text(arr_preco[0])
+      preco.next().html(',' + arr_preco[1] + '<br/>/mês')
+    })
 }
 
 function isMobile() {
