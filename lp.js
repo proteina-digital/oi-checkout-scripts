@@ -216,7 +216,8 @@ function monta_planos_v1(planos) {
           wslide = $(this).closest('.w-slide');
 
       // caso seja 500 mega, é plano destaque, caso não, removo todos os estilos que podem ter sido aplicados anteriormente
-      if (sku == 709) {
+    //   sku == 709
+      if (plano_atual.id == 'oi_total_play_fibra_500mb') {
           card_destaque = card;
           card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
           card.css('background', "#525252");
