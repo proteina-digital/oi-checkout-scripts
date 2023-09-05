@@ -223,13 +223,7 @@ function titleCase(str) {
             card.css('color', '#fff');
             card.find('.image-icon-card-2').css('display', 'block');
             card.find('.image-icon-card').css('display', 'none');
-        } else {
-            card.remove('#flag-mais-vendido')
-            card.css('background', "#fff");
-            card.css('color', "#333");
-            card.find('.image-icon-card').css('display', 'block');
-            card.find('.image-icon-card-2').css('display', 'none');
-  
+
             // estilos banner
             $('.section-banner [data-link-banner]').each(function () {
                 var link_banner = $(this)
@@ -237,9 +231,8 @@ function titleCase(str) {
                 link_banner.attr('data-megas', plano_atual.nome + 'mb');
             });
             $('.section-banner [data-mb-banner]').text(plano_atual.nome);
-          //   $('.section-banner [data-preco-banner]').text(plano_atual.salePrice.toString().split(',')[0]);
             $('.section-banner [data-preco-banner]').text(preco);
-  
+
             // estilos popup
             $('#modal-abandono [data-link-banner]').each(function () {
                 const link_popup = $(this)
@@ -249,10 +242,17 @@ function titleCase(str) {
   
             $('#modal-abandono [data-mb-banner]').text(plano_atual.nome);
             $('#modal-abandono [data-preco-modal]').text(preco);
-  
-            card.find('[data-preco]').text(preco);
-            card.find('[data-plano]').attr('data-valor-plano', plano_atual.salePrice.toString());
+
+        } else {
+            card.remove('#flag-mais-vendido')
+            card.css('background', "#fff");
+            card.css('color', "#333");
+            card.find('.image-icon-card').css('display', 'block');
+            card.find('.image-icon-card-2').css('display', 'none');
         }
+
+        card.find('[data-preco]').text(preco);
+        card.find('[data-plano]').attr('data-valor-plano', plano_atual.salePrice.toString());
     });
   
   
