@@ -230,7 +230,7 @@ function titleCase(str) {
                 link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
                 link_banner.attr('data-megas', plano_atual.nome + 'mb');
             });
-            $('.section-banner [data-mb-banner]').text(plano_atual.nome);
+            $('.section-banner [data-mb-banner]').text('500');
             $('.section-banner [data-preco-banner]').text(preco);
 
             // estilos popup
@@ -240,7 +240,7 @@ function titleCase(str) {
                 link_popup.attr('data-megas', plano_atual.nome + 'mb');
             });
   
-            $('#modal-abandono [data-mb-banner]').text(plano_atual.nome);
+            $('#modal-abandono [data-mb-banner]').text('500');
             $('#modal-abandono [data-preco-modal]').text(preco);
 
         } else {
