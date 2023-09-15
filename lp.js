@@ -244,7 +244,7 @@ function titleCase(str) {
             $('#modal-abandono [data-preco-modal]').text(preco);
 
         } else if (plano_atual.id == 'oi_total_play_fibra_100mb') {
-            card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">Oferta Especial Aproveite!</div></div>')
+            card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div style="width: 220px;" class="melhor-oferta-txt">OFERTA ESPECIAL APROVEITE!</div></div>')
             card.css('background', "#525252");
             card.css('color', '#fff');
             card.find('.image-icon-card-2').css('display', 'block');
