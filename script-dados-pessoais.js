@@ -85,6 +85,18 @@ function envia_email(email) {
 
 
 Webflow.push(function () {
+  $("[data-option-saude]").on('click', function() {
+    $('[data-select-dependentes]').toggleClass('hide')
+  });
+
+  $('[data-select-dependentes] select').on('change', function() {
+    console.log('change')
+    var dependentes_hash = [{'id': '2595', 'preco': '29,90'}, {'id': '2597', 'preco': '39,90'}, {'id': '2598', 'preco': '49,90'}, {'id': '2599', 'preco': '59,90'}, {'id': '2600', 'preco': '69,90'}]
+    $('[data-option-saude]').attr('data-id', $(this).val())
+    $("[data-option-saude] [data-valor-txt]").text('R$ ' + dependentes_hash.find(item => item.id == $(this).val()).preco)
+    $('[data-option-saude]').attr('data-valor', dependentes_hash.find(item => item.id == $(this).val()).preco)
+  })
+    
     setTimeout(function () {
         $("#finish_order").removeAttr("disabled", true);
         $("#finish_order").val("FINALIZAR");
