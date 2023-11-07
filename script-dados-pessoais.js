@@ -89,19 +89,7 @@ Webflow.push(function () {
     $('[data-select-dependentes]').toggleClass('hide')
   });
 
-    $('[data-select-dependentes] select').on('change', function() {
-        var dependentes_hash = [{'id': '2595', 'preco': '19,90'}, {'id': '2597', 'preco': '39,80'}, {'id': '2598', 'preco': '59,70'}, {'id': '2599', 'preco': '79,60'}, {'id': '2600', 'preco': '99,50'}]
-        $('[data-option-saude]').attr('data-id', $(this).val())
-        $("[data-option-saude] [data-valor-txt]").text('R$ ' + dependentes_hash.find(item => item.id == $(this).val()).preco)
-        $('[data-option-saude]').attr('data-valor', dependentes_hash.find(item => item.id == $(this).val()).preco)
 
-
-        var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')),
-        novo_valor = parseFloat($(this).attr('data-valor'))
-        $('[data-valor-total]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
-        $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total + novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
-        $('[data-dropdown-texto]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));    
-    })
     
     setTimeout(function () {
         $("#finish_order").removeAttr("disabled", true);
