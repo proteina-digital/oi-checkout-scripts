@@ -102,7 +102,9 @@ Webflow.push(function () {
 
     $('[data-valor-total]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
     $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total + novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
-    $('[data-dropdown-texto]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));    
+    $('[data-dropdown-texto]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
+    
+    $('input[name="aggregations"]').val(JSON.stringify({id: $(this).val(), valor: $('[data-option-saude]').attr('data-valor') }))
 })
 
 
