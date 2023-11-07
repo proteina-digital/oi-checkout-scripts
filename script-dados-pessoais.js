@@ -91,7 +91,7 @@ Webflow.push(function () {
 
   $('[data-select-dependentes] select').on('change', function() {
     console.log('change')
-    var dependentes_hash = [{'id': '2595', 'preco': '29,90'}, {'id': '2597', 'preco': '39,90'}, {'id': '2598', 'preco': '49,90'}, {'id': '2599', 'preco': '59,90'}, {'id': '2600', 'preco': '69,90'}]
+    var dependentes_hash = [{'id': '2595', 'preco': '19,90'}, {'id': '2597', 'preco': '39,80'}, {'id': '2598', 'preco': '59,70'}, {'id': '2599', 'preco': '79,60'}, {'id': '2600', 'preco': '99,50'}]
     $('[data-option-saude]').attr('data-id', $(this).val())
     $("[data-option-saude] [data-valor-txt]").text('R$ ' + dependentes_hash.find(item => item.id == $(this).val()).preco)
     $('[data-option-saude]').attr('data-valor', dependentes_hash.find(item => item.id == $(this).val()).preco)
