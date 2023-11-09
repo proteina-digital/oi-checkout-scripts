@@ -107,7 +107,128 @@ Webflow.push(function () {
     $('input[name="aggregations"]').val(JSON.stringify({id: $(this).val(), valor: $('[data-option-saude]').attr('data-valor') }))
 })
 
+$('[data-tv-id]').on('click', function() {
+  if(!$(this).hasClass('checked')) {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')),novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total + novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+    $('[data-dropdown-texto]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
+    
+    $(this).addClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='oi-fixo']").val(JSON.stringify({ 'id': $(this).attr('data-tv-id'), 'valor': $(this).attr('data-valor')}))
+    $("*[data-sva-card-fibra]").show()
+  } else {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')),novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total - novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+    $('[data-dropdown-texto]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
 
+    $(this).removeClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='oi-fixo']").val(null)
+    $("*[data-sva-card-fibra]").hide()
+  }
+})
+
+$('[data-oi-play-id]').on('click', function() {
+  if(!$(this).hasClass('checked')) {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')),novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total + novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+    $('[data-dropdown-texto]').text('R$ ' + (valor_total + novo_valor).toFixed(2).toString().replace('.', ','));
+    
+    $(this).addClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='oi-play']").val(JSON.stringify({ 'id': $(this).attr('data-oi-play-id'), 'valor': $(this).attr('data-valor')}))
+    $("*[data-sva-card-oi-play]").show()
+  } else {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')),novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total - novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+    $('[data-dropdown-texto]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
+
+    $(this).removeClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='oi-play']").val(null)
+    $("*[data-sva-card-oi-play]").hide()
+  }
+})
+
+$('[data-id-x]').on('click', function() {
+  if(!$(this).hasClass('checked')) {
+    var id_x = $(this).attr('data-id-x');
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')), novo_valor = parseFloat($(this).attr('data-valor')).replace(',', '.'), valor_a_remover = 0;
+
+    if($("input[name='fibra-x']").val()) {
+      $('[data-id-x]').each(function(index, elemento) {
+        if(id_x != $(elemento).attr('data-id-x') && $(elemento).hasClass('checked')) {
+          $(elemento).removeClass('checked')
+          $(elemento).find('.icon-add').show()
+          $(elemento).find('.icon-added').hide()
+          valor_a_remover = valor_a_remover + parseFloat($(elemento).attr('data-valor').replace(',', '.'));
+        }
+      })
+    }
+    $('[data-valor-total]').text('R$ ' + ((valor_total + novo_valor) - valor_a_remover).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+((valor_total + novo_valor) - valor_a_remover).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+
+    $(this).addClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='fibra-x']").val(JSON.stringify({ 'id': $(this).attr('data-id-x'), 'valor': $(this).attr('data-valor')}))
+  } else {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')), novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total - novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+
+    $(this).removeClass('checked');
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='fibra-x']").val(null)
+  }
+})
+
+$('[data-id]').on('click', function() {
+  if(!$(this).hasClass('checked')) {
+    if($(this).attr('data-option-saude')) { $('saude[name="saude"]').val($('saude[name="saude"] option:first').val()); }
+    
+    var _id = $(this).attr('data-id'),
+        valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')), novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.')),
+        valor_a_remover = 0;
+
+    if($("input[name='aggregations']").val()) {
+      $('[data-id]').each(function(index, elemento) {
+        if(_id != $(elemento).attr('data-id') && $(elemento).hasClass('checked')) {
+          $(elemento).removeClass('checked')
+          $(elemento).find('.icon-add').show()
+          $(elemento).find('.icon-added').hide()
+          valor_a_remover = valor_a_remover + parseFloat($(elemento).attr('data-valor').replace(',', '.'));
+        }
+      })
+    }
+    $('[data-valor-total]').text('R$ ' + ((valor_total + novo_valor) - valor_a_remover).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+((valor_total + novo_valor) - valor_a_remover).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+    
+    $(this).addClass('checked')
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='aggregations']").val(JSON.stringify({ 'id': $(this).attr('data-id'), 'valor': $(this).attr('data-valor')}))
+  } else {
+    var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, '')), novo_valor = parseFloat($(this).attr('data-valor').replace(',', '.'))
+    $('[data-valor-total]').text('R$ ' + (valor_total - novo_valor).toFixed(2).toString().replace('.', ','));
+    $('[data-preco-card-all]').html('<span class="card-preco-moeda">R$ </span>'+(valor_total - novo_valor).toFixed(2).toString().replace('.', ',')+'<span class="card-preco-mes">/MÊS</span>');
+
+    $(this).removeClass('checked');
+    $(this).find('.icon-add').toggle()
+    $(this).find('.icon-added').toggle()
+    $("input[name='aggregations']").val(null)
+  }
+})
     
     setTimeout(function () {
         $("#finish_order").removeAttr("disabled", true);
