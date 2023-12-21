@@ -163,6 +163,7 @@ function titleCase(str) {
               estado: estado,
           },
           success: function (res) {
+              sessionStorage.setItem('planos_api', JSON.stringify(res));
               var json = JSON.parse(res)
               monta_planos_v1(json.planos)
               Webflow.require('slider').redraw()
@@ -190,6 +191,7 @@ function titleCase(str) {
         var wslide = $(this).closest('.w-slide');
   
         if(!found) {
+            console.log('Não encontrado: ', sku);
             $(this).hide();
             if(isMobile()) {
               Webflow.require('slider').redraw()
@@ -197,6 +199,7 @@ function titleCase(str) {
               wslide.attr("data-disabled", 'disabled');
             }
         } else {
+            console.log('Encontrado: ', sku);
             $(this).show();
             if(isMobile()) {
               if(wslide.parent().hasClass('cards-slider')) {
