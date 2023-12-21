@@ -163,7 +163,7 @@ function titleCase(str) {
               estado: estado,
           },
           success: function (res) {
-              sessionStorage.setItem('planos_api', JSON.stringify(res));
+              sessionStorage.setItem('planos_api', res);
               var json = JSON.parse(res)
               monta_planos_v1(json.planos)
               Webflow.require('slider').redraw()
