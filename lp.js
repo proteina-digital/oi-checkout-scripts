@@ -233,7 +233,7 @@ function titleCase(str) {
                 link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
                 link_banner.attr('data-megas', plano_atual.nome + 'mb');
             });
-            $('.section-banner [data-mb-banner]').text('500');
+            $('[data-mb-banner]').text('500');
             $('[data-preco-banner]').text(preco);
 
             // estilos popup
@@ -244,6 +244,33 @@ function titleCase(str) {
             });
   
             $('#modal-abandono [data-mb-banner]').text('500');
+            $('#modal-abandono [data-preco-modal]').text(preco);
+
+        }else if (plano_atual.id == 'oi_total_play_fibra_600mb') {
+            card_destaque = card;
+            card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
+            card.css('background', "#525252");
+            card.css('color', '#fff');
+            card.find('.image-icon-card-2').css('display', 'block');
+            card.find('.image-icon-card').css('display', 'none');
+
+            // estilos banner
+            $('.section-banner [data-link-banner]').each(function () {
+                var link_banner = $(this)
+                link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
+                link_banner.attr('data-megas', plano_atual.nome + 'mb');
+            });
+            $('[data-mb-banner]').text('600');
+            $('[data-preco-banner]').text(preco);
+
+            // estilos popup
+            $('#modal-abandono [data-link-banner]').each(function () {
+                const link_popup = $(this)
+                link_popup.attr('href', replaceUrlParam(link_popup.attr('href'), 'plano', plano_atual.nome + 'mb'));
+                link_popup.attr('data-megas', plano_atual.nome + 'mb');
+            });
+  
+            $('#modal-abandono [data-mb-banner]').text('600');
             $('#modal-abandono [data-preco-modal]').text(preco);
 
         }
