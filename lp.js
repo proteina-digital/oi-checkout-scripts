@@ -234,7 +234,7 @@ function titleCase(str) {
                 link_banner.attr('data-megas', plano_atual.nome + 'mb');
             });
             $('.section-banner [data-mb-banner]').text('500');
-            $('.section-banner [data-preco-banner]').text(preco);
+            $('[data-preco-banner]').text(preco);
 
             // estilos popup
             $('#modal-abandono [data-link-banner]').each(function () {
