@@ -182,6 +182,8 @@ function titleCase(str) {
   
   
   function monta_planos_v1(planos) {
+    var existente = false;
+
     $('[data-plano-sku]').each(function() {
         var sku = $(this).attr('data-plano-sku');
         // var found = planos.find(element => element.id == sku);
@@ -219,7 +221,8 @@ function titleCase(str) {
             wslide = $(this).closest('.w-slide');
   
         // caso seja 500 mega, é plano destaque, caso não, removo todos os estilos que podem ter sido aplicados anteriormente
-        if (plano_atual.id == 'oi_total_play_fibra_500mb') {
+        if (plano_atual.id == 'oi_total_play_fibra_500mb' && !existente) {
+            existente = true;
             card_destaque = card;
             card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
             card.css('background', "#525252");
@@ -246,7 +249,8 @@ function titleCase(str) {
             $('#modal-abandono [data-mb-banner]').text('500');
             $('#modal-abandono [data-preco-modal]').text(preco);
 
-        }else if (plano_atual.id == 'oi_total_play_fibra_600mb') {
+        }else if (plano_atual.id == 'oi_total_play_fibra_600mb' && !existente) {
+            existente = true;
             card_destaque = card;
             card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
             card.css('background', "#525252");
