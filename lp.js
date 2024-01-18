@@ -251,7 +251,6 @@ function titleCase(str) {
 
         }else if (plano_atual.id == 'oi_total_play_fibra_600mb' && !existente) {
             if( plano_atual._tituloHero.toLowerCase().indexOf("oi fibra x 600") === -1 ){ 
-                // verifica se NÃO CONTÉM
                 continue;
             }
 
