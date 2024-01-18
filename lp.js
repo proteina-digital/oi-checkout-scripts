@@ -250,6 +250,11 @@ function titleCase(str) {
             $('#modal-abandono [data-preco-modal]').text(preco);
 
         }else if (plano_atual.id == 'oi_total_play_fibra_600mb' && !existente) {
+            if( plano_atual._tituloHero.toLowerCase().indexOf("oi fibra x 600") === -1 ){ 
+                // verifica se NÃO CONTÉM
+                continue;
+            }
+
             existente = true;
             card_destaque = card;
             card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
