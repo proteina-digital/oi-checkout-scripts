@@ -184,7 +184,7 @@ function titleCase(str) {
   function monta_planos_v1(planos) {
     var existente = false;
 
-    var has600 = products.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
+    var has600 = planos.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
 
     $('[data-plano-sku]').each(function() {
         var sku = $(this).attr('data-plano-sku');
