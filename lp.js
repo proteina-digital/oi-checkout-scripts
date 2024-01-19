@@ -184,6 +184,8 @@ function titleCase(str) {
   function monta_planos_v1(planos) {
     var existente = false;
 
+    var has600 = products.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
+
     $('[data-plano-sku]').each(function() {
         var sku = $(this).attr('data-plano-sku');
         // var found = planos.find(element => element.id == sku);
@@ -221,23 +223,13 @@ function titleCase(str) {
             wslide = $(this).closest('.w-slide');
   
         // caso seja 500 mega, é plano destaque, caso não, removo todos os estilos que podem ter sido aplicados anteriormente
-        if (plano_atual.id == 'oi_total_play_fibra_500mb' && !existente) {
-            existente = true;
+        if (plano_atual.id == 'oi_total_play_fibra_400mb') {
             card_destaque = card;
             card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
             card.css('background', "#525252");
             card.css('color', '#fff');
             card.find('.image-icon-card-2').css('display', 'block');
             card.find('.image-icon-card').css('display', 'none');
-
-            // estilos banner
-            $('.section-banner [data-link-banner]').each(function () {
-                var link_banner = $(this)
-                link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
-                link_banner.attr('data-megas', plano_atual.nome + 'mb');
-            });
-            $('[data-mb-banner]').text('500');
-            $('[data-preco-banner]').text(preco);
 
             // estilos popup
             $('#modal-abandono [data-link-banner]').each(function () {
@@ -249,18 +241,12 @@ function titleCase(str) {
             $('#modal-abandono [data-mb-banner]').text('500');
             $('#modal-abandono [data-preco-modal]').text(preco);
 
-        }else if (plano_atual.id == 'oi_total_play_fibra_600mb' && !existente) {
-            if( plano_atual._tituloHero.toLowerCase().indexOf("oi fibra x 600") === -1 ){ 
+        }
+
+        if (plano_atual.id == 'oi_total_play_fibra_600mb') {
+            if( plano_atual._tituloHero.toLowerCase().indexOf("oi fibra x 600") === -1 && has600){ 
                 return;
             }
-
-            existente = true;
-            card_destaque = card;
-            card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
-            card.css('background', "#525252");
-            card.css('color', '#fff');
-            card.find('.image-icon-card-2').css('display', 'block');
-            card.find('.image-icon-card').css('display', 'none');
 
             // estilos banner
             $('.section-banner [data-link-banner]').each(function () {
@@ -270,16 +256,6 @@ function titleCase(str) {
             });
             $('[data-mb-banner]').text('600');
             $('[data-preco-banner]').text(preco);
-
-            // estilos popup
-            $('#modal-abandono [data-link-banner]').each(function () {
-                const link_popup = $(this)
-                link_popup.attr('href', replaceUrlParam(link_popup.attr('href'), 'plano', plano_atual.nome + 'mb'));
-                link_popup.attr('data-megas', plano_atual.nome + 'mb');
-            });
-  
-            $('#modal-abandono [data-mb-banner]').text('600');
-            $('#modal-abandono [data-preco-modal]').text(preco);
 
         }
         // else if (plano_atual.id == 'oi_total_play_fibra_100mb') {
