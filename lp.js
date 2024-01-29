@@ -226,8 +226,16 @@ function titleCase(str) {
         if (plano_atual.id == 'oi_total_play_fibra_400mb') {
             card_destaque = card;
             card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
-            card.css('background', "rgb(82, 82, 82)");
-            card.css('color', 'rgb(255, 255, 255)');
+
+            if( card.hasClass('card-oferta') && card.hasClass('oi-fibra') && card.hasClass('oferta-rj') ){
+                $(".card-oferta.oi-fibra.oferta-rj").removeClass("card-oferta-melhor");
+                card.addClass('card-oferta-melhor');
+            }else{
+                card.css('background', "rgb(82, 82, 82)");
+                card.css('color', 'rgb(255, 255, 255)');
+            }
+
+            
             card.find('.image-icon-card-2').css('display', 'block');
             card.find('.image-icon-card').css('display', 'none');
 
