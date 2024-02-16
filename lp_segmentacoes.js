@@ -160,171 +160,141 @@ function titleCase(str) {
         monta_planos_v2(segmentacao_key, onde);
         $('.loading-spinner').css('display', 'none');
   }
-  
-  
-  
+
   function monta_planos_v2(segmentacao_key, onde) {
-    var existente = false;
+      if (!segmentacao_key) return;
 
-    var current_segmentacao = nova_segmentacao[segmentacao_key].SEGMENTACAO;
-    var planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == current_segmentacao.toUpperCase());
+        document.querySelectorAll('#flag-mais-vendido').forEach(e => e.remove());
+        var current_segmentacao = nova_segmentacao[segmentacao_key].SEGMENTACAO;
 
-    console.log('monta_planos_v2', segmentacao_key, planos, current_segmentacao, onde);
-
-    // var has600 = planos.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
-
-    $('[data-plano]').each(function() {
-        var card_mega = $(this).attr('data-card');
-
-        var found = planos.produtos.find(function(element) {
-          return element.nome == card_mega
-        })
-        var wslide = $(this).closest('.w-slide');
-  
-        if(!found) {
-            console.log('Não encontrado: ', card_mega);
-            $(this).hide();
-            if(isMobile()) {
-              Webflow.require('slider').redraw()
-              wslide.appendTo(".cards-slider");
-              wslide.attr("data-disabled", 'disabled');
-            }
-        } else {
-            console.log('Encontrado: ', card_mega);
-            $(this).show();
-            if(isMobile()) {
-              if(wslide.parent().hasClass('cards-slider')) {
-                var $origin = '#' + wslide.attr('data-origin');
-                wslide.appendTo($origin);
-              }
-              wslide.removeAttr('data-disabled') 
-            }
-        }
-  
-    })
-  
-    planos.produtos.forEach(function (plano_atual) {
-        var plano_nome = plano_atual.nome,
-            preco = plano_atual.preco,
-            card = $("[data-plano='" + plano_atual.nome + "']"),
-            wslide = $(this).closest('.w-slide');
-  
-        if (plano_atual.nome == '500') {
-            card_destaque = card;
-            card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
-
-            if( card.hasClass('card-oferta') && card.hasClass('oi-fibra') && card.hasClass('oferta-rj') ){
-                $(".card-oferta.oi-fibra.oferta-rj").removeClass("card-oferta-melhor");
-                card.addClass('card-oferta-melhor');
+        if (typeof current_segmentacao === 'undefined') {
+            if(capitais_segmentacoes(segmentacao_key)){
+              current_segmentacao = nova_segmentacao[capitais_segmentacoes(segmentacao_key)].SEGMENTACAO;
             }else{
-                card.css('background', "rgb(82, 82, 82)");
-                card.css('color', 'rgb(255, 255, 255)');
+              return;
+            }
+        }
+
+          if (current_segmentacao == 'COMBATE') current_segmentacao = 'COMBATE1';
+        var planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == current_segmentacao.toUpperCase())
+        var card_destaque = null;
+
+        console.log('segmentacao', current_segmentacao);
+        console.log('segmentacao_key', segmentacao_key);
+
+        if(!current_segmentacao) {
+            // default regular
+            planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == 'REGULAR')
+        }
+
+        console.log('monta_planos_v2 rewrite', segmentacao_key, planos, current_segmentacao, onde);
+
+        $('[data-card]').each(function() {
+            var card_mega = $(this).attr('data-card');
+            var found = planos.produtos.find(element => element.nome == card_mega);
+            var wslide = $(this).closest('.w-slide');
+
+            if(!found) {
+                $(this).hide();
+                if($(window).width() < 768) {
+                  wslide.appendTo(".cards-slider");
+                  wslide.attr("data-disabled", 'disabled');
+                  // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
+                }
+            } else {
+                $(this).show();
+                if($(window).width() < 768) {
+                  if(wslide.parent().hasClass('cards-slider')) {
+                    var $origin = '#' + wslide.attr('data-origin');
+                    wslide.appendTo($origin);
+                  }
+                  wslide.removeAttr('data-disabled') 
+                }
             }
 
+        })
+
+        planos.produtos.forEach(function(plano_atual) {
+
+            var card = $("[data-card='" + plano_atual.nome + "']");
+
+            // Na nova página de redesign, não tem a opção de destaque no card, então criei essa exceção
+            if (typeof $("body").attr('data-card-sem-destaque') !== 'undefined') {
+              plano_atual.mais_vendido = false;
+            }
+
+            if (plano_atual.mais_vendido === true) {
+                card_destaque = card;
+                card.append('<div id="flag-mais-vendido" class="melhor-oferta"><div class="melhor-oferta-txt">MELHOR PLANO</div></div>')
+                card.css('background', "#525252");
+                card.css('color', '#fff');
+                card.find('.image-icon-card-2').css('display', 'block');
+                card.find('.image-icon-card').css('display', 'none');
+            } else {
+                card.remove('#flag-mais-vendido')
+                card.css('background', "#fff");
+                card.css('color', "#333");
+                card.find('.image-icon-card').css('display', 'block');
+                card.find('.image-icon-card-2').css('display', 'none');
+            }
+
+            if(plano_atual.banner === true) {
+                $('.section-banner [data-link-banner]').each(function() {
+                    var link_banner = $(this)
+                    link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome+'mb'));
+                    link_banner.attr('data-megas', plano_atual.nome+'mb');
+                });
+                $('.section-banner [data-mb-banner]').text(plano_atual.nome);
+                $('.section-banner [data-preco-banner]').text(plano_atual.preco.split(',')[0]);
+            }
+
+            if(plano_atual.popup === true) {
+                $('#modal-abandono [data-link-banner]').each(function() {
+                    const link_popup = $(this)
+                    link_popup.attr('href', replaceUrlParam(link_popup.attr('href'), 'plano', plano_atual.nome+'mb'));
+                    link_popup.attr('data-megas', plano_atual.nome+'mb');
+                });
+
+                $('#modal-abandono [data-mb-banner]').text(plano_atual.nome);
+                $('#modal-abandono [data-preco-modal]').text(plano_atual.preco.split(',')[0]);
+            }
+
+            card.find('[data-preco]').text(plano_atual.preco.split(',')[0]);
+            card.find('[data-plano]').attr('data-valor-plano', plano_atual.preco);  
+        })
+
+        sessionStorage.setItem('segmentacao', segmentacao_key);
+        if ($(window).width() < 768) {
             
-            card.find('.image-icon-card-2').css('display', 'block');
-            card.find('.image-icon-card').css('display', 'none');
+
+                      $('.card-oferta.oi-fibra').css('order', 2);
+                      $('#flag-mais-vendido').parent().css('order', 1);
 
 
-            // estilos popup
-            $('#modal-abandono [data-link-banner]').each(function () {
-                const link_popup = $(this)
-                link_popup.attr('href', replaceUrlParam(link_popup.attr('href'), 'plano', plano_atual.nome + 'mb'));
-                link_popup.attr('data-megas', plano_atual.nome + 'mb');
-            });
-  
-            $('#modal-abandono [data-mb-banner]').text('500');
-            $('#modal-abandono [data-preco-modal]').text(preco);
+                      if(card_destaque.parent().hasClass('w-slide')) {
+                       $("#" + card_destaque.attr('data-origin') ).prepend(card_destaque.parent())
+                      }
+                      
+                  }
 
-        }
+          
+          var current_segmentacao_arr = segmentacao_key.split('-')
+          console.log(current_segmentacao_arr)
+          var nome_cidade = current_segmentacao_arr[0].toLowerCase().replaceAll('_', ' ').normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          var cidade = [title_case(nome_cidade).replaceAll(' De ', ' de '), current_segmentacao_arr[1]].join(', ');
+          $('[data-open-search]').html((cidade));
+          $('[data-city-name]').text((cidade));
 
-        if (plano_atual.nome == '600') {
-
-            // estilos banner
-            $('.section-banner [data-link-banner]').each(function () {
-                var link_banner = $(this)
-                link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome + 'mb'));
-                link_banner.attr('data-megas', plano_atual.nome + 'mb');
-            });
-            $('[data-mb-banner]').text('600');
-            $('[data-preco-banner]').text(preco);
-
-        }else {
-            card.remove('#flag-mais-vendido')
-            card.css('background', "#fff");
-            card.css('color', "#333");
-            card.find('.image-icon-card').css('display', 'block');
-            card.find('.image-icon-card-2').css('display', 'none');
-        }
-
-        card.find('[data-preco]').text(preco);
-        card.find('[data-plano]').attr('data-valor-plano', preco);
-    });
-  
-  
-   var tab_telefone = $('[data-with-telefone]')
-    var tab_oiplay = $('[data-with-oiplay]')
-  
-  
-    tab_telefone.each(function() {
-      var card = $(this)
-      var preco = card.find('[data-preco]')
-      var centavos = preco.next()
-  
-      var preco_completo = parseFloat((preco.text() + centavos.text()).replace(',', '.').replace(/[^\d.-]/g, '')) + 29.90;
-      preco_completo = preco_completo.toFixed(2).replace('.', ',')
-      var arr_preco = preco_completo.split(',')
-  
-  
-      preco.text(arr_preco[0])
-      preco.next().html(',' + arr_preco[1] + '<br/>/mês')
-    })
-  
-      tab_oiplay.each(function() {
-         var card = $(this)
-        var preco = card.find('[data-preco]')
-        var centavos = preco.next()
-  
-        var preco_completo = parseFloat((preco.text() + centavos.text()).replace(',', '.').replace(/[^\d.-]/g, '')) + 69.90;
-        preco_completo = preco_completo.toFixed(2).replace('.', ',')
-        var arr_preco = preco_completo.split(',')
-  
-  
-        preco.text(arr_preco[0])
-        preco.next().html(',' + arr_preco[1] + '<br/>/mês')
-      })
-  
-    
-    $('[data-with]').on('click', function() {
-      var current_plano_type = $(this).attr('data-with')
-  
-      $('[data-with]').removeClass('active');
-      $(this).addClass('active')
-  
-      switch (current_plano_type) {
-        case 'fibra':
-          $('[data-with-fibra]').removeClass('hide');
-          $('[data-with-telefone]').addClass('hide');
-          $('[data-with-oiplay]').addClass('hide');
-          $('[data-contratar-online]').show();
-          break;
-        case 'fixo':
-          $('[data-with-fibra]').addClass('hide');
-          $('[data-with-telefone]').removeClass('hide');
-          $('[data-with-oiplay]').addClass('hide');
-          $('[data-contratar-online]').hide();
-          break;
-        case 'oiplay':
-          $('[data-with-fibra]').addClass('hide');
-          $('[data-with-telefone]').addClass('hide');
-          $('[data-with-oiplay]').removeClass('hide');
-          $('[data-contratar-online]').hide();
-          break;        
-        default:
-          break;
-      }
-  
-    })
+        console.log("card_destaque", card_destaque);
+                  
+        setTimeout(() => {
+          Webflow.require('slider').redraw()
+          card_destaque.closest('.w-slider-nav').find('.w-slider-dot').trigger('click')
+          if(card_destaque && card_destaque.parent().hasClass('w-slide')) {
+                        console.log(card_destaque.index())
+                        card_destaque.closest('.w-slider-nav').find('.w-slider-dot:eq('+ card_destaque.index() + ')').trigger('click')
+                      }
+        }, 2000);
   }
   
   function isMobile() {
