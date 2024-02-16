@@ -148,26 +148,28 @@ function titleCase(str) {
         $('.loading-spinner').css('display', 'flex')
         $('.modal-cidades').css('display', 'none')
   
-        on_select_city(cidade, estado);
+        on_select_city(cidade, estado, 'click no modal');
     });
   })
   
-  function on_select_city(cidade, estado) {
+  function on_select_city(cidade, estado, onde) {
 
         var municipio = cidade.replaceAll(' ', '_').normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
         var segmentacao_key = municipio + "-" + estado;
 
-        monta_planos_v2(segmentacao_key);
+        monta_planos_v2(segmentacao_key, onde);
         $('.loading-spinner').css('display', 'none');
   }
   
   
   
-  function monta_planos_v2(segmentacao_key) {
+  function monta_planos_v2(segmentacao_key, onde) {
     var existente = false;
 
     var current_segmentacao = nova_segmentacao[segmentacao_key].SEGMENTACAO;
-    var planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == current_segmentacao.toUpperCase())
+    var planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == current_segmentacao.toUpperCase());
+
+    console.log('monta_planos_v2', segmentacao_key, 'tem plano? '+planos, onde);
 
     // var has600 = planos.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
 
