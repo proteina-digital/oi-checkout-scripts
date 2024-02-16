@@ -169,7 +169,7 @@ function titleCase(str) {
     var current_segmentacao = nova_segmentacao[segmentacao_key].SEGMENTACAO;
     var planos = nova_segmentacao_precos.find(segmentacao_preco => segmentacao_preco.nome.toUpperCase() == current_segmentacao.toUpperCase());
 
-    console.log('monta_planos_v2', segmentacao_key, 'tem plano? '+planos, onde);
+    console.log('monta_planos_v2', segmentacao_key, planos, current_segmentacao, onde);
 
     // var has600 = planos.filter(product => product.id === "oi_total_play_fibra_600mb").length >= 2;
 
