@@ -6,8 +6,8 @@ const nova_segmentacao_precos = [
 		nome: "novo_regular",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 400, preco: "89,90", mais_vendido: false, popup: true, banner: false },
+	        { nome: 600, preco: "109,90", mais_vendido: true, popup: false, banner: true },
 	        { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
@@ -15,8 +15,8 @@ const nova_segmentacao_precos = [
 		nome: "novo_combate",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 400, preco: "89,90", mais_vendido: false, popup: true, banner: false },
+	        { nome: 600, preco: "109,90", mais_vendido: true, popup: false, banner: true },
 	        { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
@@ -24,8 +24,8 @@ const nova_segmentacao_precos = [
 		nome: "guerrilha1",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 400, preco: "89,90", mais_vendido: false, popup: true, banner: false },
+	        { nome: 600, preco: "109,90", mais_vendido: true, popup: false, banner: true },
 	        { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
@@ -33,9 +33,9 @@ const nova_segmentacao_precos = [
 		nome: "alto_valor",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 6001, preco: "149,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 400, preco: "89,90", mais_vendido: false, popup: true, banner: false },
+	        { nome: 600, preco: "109,90", mais_vendido: true, popup: false, banner: false },
+	        { nome: 6001, preco: "149,90", mais_vendido: false, popup: false, banner: true },
 	        { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	}
