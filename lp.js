@@ -53,6 +53,7 @@ function titleCase(str) {
     })
     var cidade = [nome_cidade, current_segmentacao[1]].join(', ');
     $('[data-open-search]').html(cidade);
+    $('[data-open-search]').attr('data-cidade-escolhida', 'true');
   }
   
   Webflow.push(function () {
@@ -144,6 +145,7 @@ function titleCase(str) {
   
         $('[data-close-search]').trigger('click')
         $('[data-open-search]').html(cidade_titulo);
+        $('[data-open-search]').attr('data-cidade-escolhida', 'true');
   
         $('.loading-spinner').css('display', 'flex')
         $('.modal-cidades').css('display', 'none')
