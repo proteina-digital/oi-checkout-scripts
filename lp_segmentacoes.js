@@ -157,6 +157,10 @@ function titleCase(str) {
         var municipio = cidade.replaceAll(' ', '_').normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
         var segmentacao_key = municipio + "-" + estado;
 
+        sessionStorage.setItem('selected_city', cidade);
+        sessionStorage.setItem('selected_state', estado);
+        sessionStorage.setItem('segmentacao', segmentacao_key);
+
         monta_planos_v2(segmentacao_key, onde);
         $('.loading-spinner').css('display', 'none');
   }
