@@ -36,7 +36,7 @@ const nova_segmentacao_precos = [
 	        { nome: 500, preco: "89,90", mais_vendido: false, popup: true, banner: false },
 	        { nome: 600, preco: "109,90", mais_vendido: true, popup: false, banner: false },
 	        { nome: 6001, preco: "149,90", mais_vendido: false, popup: false, banner: true },
-	        { nome: 700, preco: "169,90", mais_vendido: false, popup: false, banner: true },
+	        { nome: 700, preco: "169,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 1, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	}
