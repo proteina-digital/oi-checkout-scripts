@@ -1,5 +1,5 @@
 Webflow.push(function() {
-  var site = window.location.origin+'/checkout/cobertura';
+  var site = window.location.origin+'/checkout';
   // FIND POLYFILL
   if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
