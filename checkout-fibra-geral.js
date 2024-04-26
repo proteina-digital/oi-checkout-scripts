@@ -72,12 +72,12 @@ function cards_por_segmentacao(tipo_pagina_planos){
         if( produto.mais_vendido ){
             $('#flag-mais-vendido').appendTo(card)
             card.addClass('ck-melhor-oferta');
-            card.find('.text-block-2').addClass('melhor-oferta');
-            card.find('.text-block-4').addClass('melhor-oferta');
-            card.find('.text-block-5').addClass('melhor-oferta');
-            card.find('.text-block-6').addClass('melhor-oferta');
-            card.find('.texto-debito').addClass('melhor-oferta');
-            card.find('.txt-servicos').addClass('melhor-oferta');
+            card.find('.text-block-2').addClass('ck-melhor-oferta');
+            card.find('.text-block-4').addClass('ck-melhor-oferta');
+            card.find('.text-block-5').addClass('ck-melhor-oferta');
+            card.find('.text-block-6').addClass('ck-melhor-oferta');
+            card.find('.texto-debito').addClass('ck-melhor-oferta');
+            card.find('.txt-servicos').addClass('ck-melhor-oferta');
             card.find('.btn').css('background', '#00ab0f');
             card.find('.btn').css('color', '#fff');
         }
