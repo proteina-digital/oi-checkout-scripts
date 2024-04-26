@@ -1,5 +1,5 @@
 Webflow.push(function() {
-  var site = window.location.origin+'/checkout';
+  var checkout_url = window.location.origin+'/checkout';
   // FIND POLYFILL
   if (!Array.prototype.find) {
     Array.prototype.find = function (predicate) {
@@ -32,14 +32,14 @@ function cards_por_segmentacao(tipo_pagina_planos){
   // Verificar se 'cidade' está presente e tem algum valor
   var cidade = sessionStorage.getItem('cidade');
   if (cidade === null && cidade === undefined && cidade === '') {
-      window.location.href = site + window.location.search;
+      window.location.href = checkout_url + window.location.search;
       return false;
   }
 
   // Verificar se 'uf' está presente e tem algum valor
   var uf = sessionStorage.getItem('uf');
   if (uf === null && uf === undefined && uf === '') {
-      window.location.href = site + window.location.search;
+      window.location.href = checkout_url + window.location.search;
       return false;
   }
 
@@ -50,14 +50,14 @@ function cards_por_segmentacao(tipo_pagina_planos){
   var segment = nova_segmentacao[enderecoFormatado].SEGMENTACAO;
 
   if( !segment ){
-    window.location.href = site + window.location.search;
+    window.location.href = checkout_url + window.location.search;
       return false;
   }
 
   const segmentacaoEncontrada = nova_segmentacao_precos.find(seg => seg.nome === segment);
 
   if( !segmentacaoEncontrada ){
-    window.location.href = site + window.location.search;
+    window.location.href = checkout_url + window.location.search;
       return false;
   }
 
@@ -209,7 +209,7 @@ $.ajax({
 
             // if(false) {
             if(!response.viabilidade) {
-              window.location.href = site + "/sem-cobertura" + window.location.search;
+              window.location.href = checkout_url + "/sem-cobertura" + window.location.search;
             } else {
               sessionStorage.setItem('planos_api', JSON.stringify(response));
 
@@ -490,7 +490,7 @@ function form_cobertura(form){
 
               // if(false) {
               if(!response.status_viability) {
-                window.location.href = site + "/sem-cobertura" + window.location.search;
+                window.location.href = checkout_url + "/sem-cobertura" + window.location.search;
               } else {
 
           // RETORNO COBERTURA
@@ -504,7 +504,7 @@ function form_cobertura(form){
 
             sessionStorage.removeItem('etapa');
         sessionStorage.setItem('etapa', 'etapa2');
-            window.location.href = site + "/planos" + window.location.search;
+            window.location.href = checkout_url + "/planos" + window.location.search;
         }
       }, 
       error: function(jqxhr, status, exception){
