@@ -1,29 +1,27 @@
-Webflow.push(function() {
-  var checkout_url = window.location.origin+'/checkout';
-  // FIND POLYFILL
-  if (!Array.prototype.find) {
-    Array.prototype.find = function (predicate) {
-        if (this == null) {
-            throw new TypeError('Array.prototype.find called on null or undefined');
-        }
-        if (typeof predicate !== 'function') {
-            throw new TypeError('predicate must be a function');
-        }
-        var list = Object(this);
-        var length = list.length >>> 0;
-        var thisArg = arguments[1];
-        var value;
-  
-        for (var i = 0; i < length; i++) {
-            value = list[i];
-            if (predicate.call(thisArg, value, i, list)) {
-                return value;
-            }
-        }
-        return undefined;
-    };
-  }
-});
+var checkout_url = window.location.origin+'/checkout';
+// FIND POLYFILL
+if (!Array.prototype.find) {
+  Array.prototype.find = function (predicate) {
+      if (this == null) {
+          throw new TypeError('Array.prototype.find called on null or undefined');
+      }
+      if (typeof predicate !== 'function') {
+          throw new TypeError('predicate must be a function');
+      }
+      var list = Object(this);
+      var length = list.length >>> 0;
+      var thisArg = arguments[1];
+      var value;
+
+      for (var i = 0; i < length; i++) {
+          value = list[i];
+          if (predicate.call(thisArg, value, i, list)) {
+              return value;
+          }
+      }
+      return undefined;
+  };
+}
 
 function cards_por_segmentacao(tipo_pagina_planos){
 
