@@ -1,3 +1,4 @@
+var site = window.location.origin+'/checkout/cobertura';
 // FIND POLYFILL
 if (!Array.prototype.find) {
   Array.prototype.find = function (predicate) {
