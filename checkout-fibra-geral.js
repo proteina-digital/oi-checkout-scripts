@@ -71,7 +71,7 @@ function cards_por_segmentacao(tipo_pagina_planos){
 
         if( produto.mais_vendido ){
             $('#flag-mais-vendido').appendTo(card)
-            card.addClass('melhor-oferta');
+            card.addClass('ck-melhor-oferta');
             card.find('.text-block-2').addClass('melhor-oferta');
             card.find('.text-block-4').addClass('melhor-oferta');
             card.find('.text-block-5').addClass('melhor-oferta');
