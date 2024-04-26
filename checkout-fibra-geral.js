@@ -137,7 +137,7 @@ function findWithAttr(array, attr, value) {
 }
 var index_plano_destaque = false;
 var address_ready = false;
-var site = window.location.origin;
+
 function validEmail(e) {
     return !!String(e).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 }
