@@ -94,7 +94,7 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
                 agendamento_data_2: agendamento_data[1],
                 identifier: identifier
             }),
-            success: function (res) { },
+            success: function (res) { $('#pre-agendamento-section').addClass('hide');},
             error: function (jqxhr, status, exception) {
             console.log(jqxhr);
             console.log(status);
