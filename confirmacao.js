@@ -107,7 +107,7 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
         sessionStorage.setItem('datas', JSON.stringify(agendamento_data));
         sessionStorage.setItem('periodo', JSON.stringify(periodo));
 
-        window.location.href = site + "/oi-play-tv" + window.location.search;
+        //window.location.href = site + "/oi-play-tv" + window.location.search;
     }
 
 	var agendamento_1_formatted = agendamento_data[0].split('-').reverse().join('/')
