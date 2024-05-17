@@ -1,4 +1,4 @@
-function title_case(str) {
+function titleCase(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
         // You do not need to check if i is larger than splitStr length, as your for does that for you
@@ -157,10 +157,6 @@ function title_case(str) {
         var municipio = cidade.replaceAll(' ', '_').normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
         var segmentacao_key = municipio + "-" + estado;
 
-        sessionStorage.setItem('selected_city', cidade);
-        sessionStorage.setItem('selected_state', estado);
-        sessionStorage.setItem('segmentacao', segmentacao_key);
-
         monta_planos_v2(segmentacao_key, onde);
         $('.loading-spinner').css('display', 'none');
   }
@@ -292,7 +288,8 @@ function title_case(str) {
         console.log("card_destaque", card_destaque);
                   
         setTimeout(() => {
-          Webflow.require('slider').redraw()
+            Webflow.require('slider').redraw()
+            Webflow.require('slider').ready()
           card_destaque.closest('.w-slider-nav').find('.w-slider-dot').trigger('click')
           if(card_destaque && card_destaque.parent().hasClass('w-slide')) {
                         console.log(card_destaque.index())
