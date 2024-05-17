@@ -1,4 +1,4 @@
-function titleCase(str) {
+function title_case(str) {
     var splitStr = str.toLowerCase().split(' ');
     for (var i = 0; i < splitStr.length; i++) {
         // You do not need to check if i is larger than splitStr length, as your for does that for you
@@ -156,6 +156,10 @@ function titleCase(str) {
 
         var municipio = cidade.replaceAll(' ', '_').normalize('NFD').replace(/[\u0300-\u036f]/g, "").toUpperCase();
         var segmentacao_key = municipio + "-" + estado;
+
+        sessionStorage.setItem('selected_city', cidade);
+        sessionStorage.setItem('selected_state', estado);
+        sessionStorage.setItem('segmentacao', segmentacao_key);
 
         monta_planos_v2(segmentacao_key, onde);
         $('.loading-spinner').css('display', 'none');
