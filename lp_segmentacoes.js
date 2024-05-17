@@ -202,7 +202,7 @@ function title_case(str) {
                 $(this).hide();
                 if($(window).width() < 768) {
                   wslide.appendTo(".cards-slider");
-                  wslide.attr("data-disabled", 'disabled');
+                  wslide.addClass('w-condition-invisible');
                   // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
                 }
             } else {
@@ -212,9 +212,11 @@ function title_case(str) {
                     var $origin = '#' + wslide.attr('data-origin');
                     wslide.appendTo($origin);
                   }
-                  wslide.removeAttr('data-disabled') 
+                  wslide.removeClass('w-condition-invisible');
                 }
             }
+
+            Webflow.require('slider').redraw();
 
         })
 
