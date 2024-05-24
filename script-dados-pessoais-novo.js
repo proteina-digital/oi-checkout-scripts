@@ -683,4 +683,4 @@ sessionStorage.setItem('valor_plano_escolhido', sessionStorage.getItem('original
 
 
 });
-$(document).ajaxComplete(function (e, x, config) { if (config.url.indexOf('https://webflow.com/api/v1/form/') !== -1) { window.location.href = site + '/confirmacao' + search } });
+$(document).ajaxComplete(function (e, x, config) { if (config.url.indexOf('https://webflow.com/api/v1/form/') !== -1) { console.log("retorno debug", e, x, config); } });
