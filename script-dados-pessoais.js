@@ -481,7 +481,10 @@ $('[data-id]').on('click', function() {
                 item.focus();
                 item.css("border-color", "red");
                 invalid = true;
+                console.log(input_name, expre);
             }
+
+            
         });
         if (invalid) return false;
     });
