@@ -45,7 +45,15 @@ function cards_por_segmentacao(tipo_pagina_planos){
 
   var enderecoFormatado = enderecoOriginal.normalize("NFD").replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_').toUpperCase();
 
-  var segment = nova_segmentacao[enderecoFormatado].SEGMENTACAO;
+  /*AJUSTADO PARA RESOLVER O PROBLEMA DE BYPASS SEM CIDADE NA SEGMENTAÇÃO*/
+  var segment;
+
+    if (nova_segmentacao[enderecoFormatado]) {
+      segment = nova_segmentacao[enderecoFormatado].SEGMENTACAO;
+    } else {
+      segment = nova_segmentacao['RIO_DE_JANEIRO-RJ'].SEGMENTACAO;
+    }
+    // var segment = nova_segmentacao[enderecoFormatado].SEGMENTACAO;
 
   if( !segment ){
     window.location.href = checkout_url + window.location.search;
