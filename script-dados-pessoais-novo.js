@@ -1,3 +1,9 @@
+/**
+ * Failed to minify the file using Terser v5.19.2. Serving the original version.
+ * Original file: /gh/proteina-digital/oi-checkout-scripts@0097f992a689a3b252997a6b0d9ac752e0178ea6/script-dados-pessoais-novo.js
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
 var Webflow = Webflow || [];
 const search = window.location.search;
 var cpf_valido = false;
@@ -568,6 +574,8 @@ $('[data-id]').on('click', function() {
         var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
+          console.log("form_input_" + input_name, item.val());
+
             let expre;
             const input_name = item.attr("name");
             let val =
