@@ -101,8 +101,12 @@ function conclui_etapa(div_pai, etapa_atual, btn, proxima_etapa){
             var fieldName = ell.attr('name');
             var fieldValue = ell.val();
 
-            etapa_atual.find("[data-preenchido='"+fieldName+"']").text(fieldValue);
+            if(fieldName != 'pagamento'){
+              etapa_atual.find("[data-preenchido='"+fieldName+"']").text(fieldValue);
+            }
         });
+
+    etapa_atual.find("[data-preenchido='pagamento']").text(sessionStorage.getItem("pagamento"));
 
         div_pai.addClass('hide_concluido');
         etapa_atual.removeClass('hide_concluido');
