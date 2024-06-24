@@ -568,7 +568,8 @@ $('[data-id]').on('click', function() {
         var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
-          console.log("form_input_" + input_name, item.val());
+          
+          console.log("form_input_" +  item.attr("name"), item.val());
 
             let expre;
             const input_name = item.attr("name");
