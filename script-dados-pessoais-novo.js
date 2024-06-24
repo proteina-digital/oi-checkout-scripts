@@ -85,16 +85,16 @@ function envia_email(email) {
 
 function conclui_etapa(div_pai, etapa_atual, btn, proxima_etapa){
 
-  console.log("div_pai", div_pai);
-    console.log("etapa_atual", etapa_atual);
-    console.log("btn", btn);
+  //console.log("div_pai", div_pai);
+   // console.log("etapa_atual", etapa_atual);
+   // console.log("btn", btn);
 
   if( div_pai && etapa_atual ){
 
     btn.text('VALIDANDO...');
     var inputs_area = div_pai.find('input, select');
 
-    console.log("inputs_area", inputs_area);
+   // console.log("inputs_area", inputs_area);
 
     inputs_area.each(function(index, el) {
             var ell = $(this);
@@ -474,7 +474,7 @@ $('[data-id]').on('click', function() {
             sessionStorage.setItem("portabilidade_nome", "novo");
         }
         sessionStorage.setItem("portabilidade", radio);
-        console.log(radio);
+       // console.log(radio);
     });
 
     $(document).on("click", ".dia_vencimento", function (e) {
@@ -487,7 +487,7 @@ $('[data-id]').on('click', function() {
         $("input[name='dia_vencimento']").val(
             dia_vencimento.attr("data-vencimento")
         );
-        console.log($("input[name='dia_vencimento']").val());
+       // console.log($("input[name='dia_vencimento']").val());
 
         dataLayer.push({
             event: "evento_escolher_vencimento",
@@ -653,7 +653,7 @@ sessionStorage.setItem('valor_plano_escolhido', sessionStorage.getItem('original
     }
 
     sessionStorage.setItem("pagamento", radio);
-    console.log("pagamento", radio);
+  //  console.log("pagamento", radio);
 
     var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, ''));
     var valor_internet = parseFloat(sessionStorage.getItem('valor_plano_escolhido').replace(',', '.').replace(/[^\d.-]/g, ''));
@@ -690,4 +690,4 @@ sessionStorage.setItem('valor_plano_escolhido', sessionStorage.getItem('original
 
 
 });
-$(document).ajaxComplete(function (e, x, config) { if (config.url.indexOf('https://webflow.com/api/v1/form/') !== -1) { console.log("teste envio"); } });
+$(document).ajaxComplete(function (e, x, config) { if (config.url.indexOf('https://webflow.com/api/v1/form/') !== -1) { window.location.href = site + '/confirmacao' + search } });
