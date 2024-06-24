@@ -473,30 +473,6 @@ $('[data-id]').on('click', function() {
         console.log(radio);
     });
 
-    $("input[value='dcc']").attr("checked", "checked"); // JÁ CRIA A SESSION COM O VALOR DO PAGAMENTO PRÉ SELECIONADO (DCC)
-    sessionStorage.setItem("pagamento", $("input[name='pagamento']:checked").val());
-
-    $("input[name='pagamento']").change(function () {
-        var radio = $("input[name='pagamento']:checked").val();
-        var input_dcc = $("div[data-opcional='dcc']");
-
-        if (radio == "dcc") {
-            input_dcc.removeClass("hide");
-            input_dcc.find("input").attr("required", "true");
-            dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Débito", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
-            $("#banco").attr("required", "true");
-        } else {
-            input_dcc.addClass("hide");
-            input_dcc.find("input").removeAttr("required");
-            $("input[value='dcc']").removeAttr("checked");
-            dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Boleto", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
-            $("#banco").removeAttr("required");
-        }
-
-        sessionStorage.setItem("pagamento", radio);
-        console.log(radio);
-    });
-
     $(document).on("click", ".dia_vencimento", function (e) {
         e.preventDefault();
 
@@ -568,7 +544,7 @@ $('[data-id]').on('click', function() {
         var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
-          
+
           console.log("form_input_" +  item.attr("name"), item.val());
 
             let expre;
@@ -649,8 +625,32 @@ sessionStorage.setItem('valor_plano_escolhido', sessionStorage.getItem('original
     }
 );
 
+
+  $("input[value='dcc']").attr("checked", "checked"); // JÁ CRIA A SESSION COM O VALOR DO PAGAMENTO PRÉ SELECIONADO (DCC)
+  sessionStorage.setItem("pagamento", $("input[name='pagamento']:checked").val());
+
   $('[name="pagamento"]').on('change', function(e) {
     e.stopImmediatePropagation();
+
+    var radio = $("input[name='pagamento']:checked").val();
+    var input_dcc = $("div[data-opcional='dcc']");
+
+    if (radio == "dcc") {
+        input_dcc.removeClass("hide");
+        input_dcc.find("input").attr("required", "true");
+        dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Débito", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
+        $("#banco").attr("required", "true");
+    } else {
+        input_dcc.addClass("hide");
+        input_dcc.find("input").removeAttr("required");
+        $("input[value='dcc']").removeAttr("checked");
+        dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Boleto", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
+        $("#banco").removeAttr("required");
+    }
+
+    sessionStorage.setItem("pagamento", radio);
+    console.log("pagamento", radio);
+
     var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, ''));
     var valor_internet = parseFloat(sessionStorage.getItem('valor_plano_escolhido').replace(',', '.').replace(/[^\d.-]/g, ''));
 
