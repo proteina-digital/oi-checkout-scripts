@@ -92,7 +92,7 @@ function conclui_etapa(div_pai, etapa_atual, btn, proxima_etapa){
   if( div_pai && etapa_atual ){
 
     btn.text('VALIDANDO...');
-    var inputs_area = div_pai.find('input');
+    var inputs_area = div_pai.find('input, select');
 
     console.log("inputs_area", inputs_area);
 
