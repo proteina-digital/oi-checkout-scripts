@@ -1,9 +1,3 @@
-/**
- * Failed to minify the file using Terser v5.19.2. Serving the original version.
- * Original file: /gh/proteina-digital/oi-checkout-scripts@0097f992a689a3b252997a6b0d9ac752e0178ea6/script-dados-pessoais-novo.js
- *
- * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
- */
 var Webflow = Webflow || [];
 const search = window.location.search;
 var cpf_valido = false;
