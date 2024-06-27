@@ -357,12 +357,27 @@ $('[data-id]').on('click', function() {
             input_dcc.find("input").attr("required", "true");
             dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Débito", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
             $("#banco").attr("required", "true");
-        } else {
+            $(".div-pagamento-cc").addClass("hide");
+            $(".aceitar_cc").removeAttr("required");
+            $(".aceitar_cc").removeAttr("checked");
+        } else if(radio == "Boleto" || radio == "boleto") {
             input_dcc.addClass("hide");
             input_dcc.find("input").removeAttr("required");
             $("input[value='dcc']").removeAttr("checked");
             dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Boleto", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
             $("#banco").removeAttr("required");
+            $(".div-pagamento-cc").addClass("hide");
+            $(".aceitar_cc").removeAttr("required");
+            $(".aceitar_cc").removeAttr("checked");
+        } else{
+            input_dcc.addClass("hide");
+            input_dcc.find("input").removeAttr("required");
+            $("input[value='dcc']").removeAttr("checked");
+            dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Cartão", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
+            $("#banco").removeAttr("required");
+            $(".div-pagamento-cc").removeClass("hide");
+            $(".aceitar_cc").attr("required", "true");
+            $(".aceitar_cc").removeAttr("checked");
         }
 
         sessionStorage.setItem("pagamento", radio);
