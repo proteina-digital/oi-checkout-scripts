@@ -98,9 +98,25 @@ function form_popup(form){
 var abandonou = false;
 Webflow.push(function () {
 
+    if (typeof $.fn.mask !== 'undefined') {
+        var SPMaskBehavior2 = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+
+        spOptions2 = {
+            onKeyPress: function(val, e, field, options) {
+                field.mask(SPMaskBehavior2.apply({}, arguments), options);
+            }
+        };
+
+        $("input[name='telefone_motivo']").mask(SPMaskBehavior2, spOptions2);
+    }else{
+        alert("Mascara de telefone não definida");
+    }
+
     jQuery("select[name='motivo_saida']").on('change', function(){
         var selectedValue = jQuery(this).val();
-        
+
         if(selectedValue == "6- Outros") {
           jQuery("textarea[name='outros_motivos']").attr('required', 'true');
         } else {
