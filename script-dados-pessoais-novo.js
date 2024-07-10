@@ -1,6 +1,57 @@
 var Webflow = Webflow || [];
 const search = window.location.search;
 var cpf_valido = false;
+
+function validaCPF(cpf) {
+  var Soma = 0
+  var Resto
+
+  var strCPF = String(cpf).replace(/[^\d]/g, '')
+  
+  if (strCPF.length !== 11)
+     return false
+  
+  if ([
+    '00000000000',
+    '11111111111',
+    '22222222222',
+    '33333333333',
+    '44444444444',
+    '55555555555',
+    '66666666666',
+    '77777777777',
+    '88888888888',
+    '99999999999',
+    ].indexOf(strCPF) !== -1)
+    return false
+
+  for (i=1; i<=9; i++)
+    Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+
+  Resto = (Soma * 10) % 11
+
+  if ((Resto == 10) || (Resto == 11)) 
+    Resto = 0
+
+  if (Resto != parseInt(strCPF.substring(9, 10)) )
+    return false
+
+  Soma = 0
+
+  for (i = 1; i <= 10; i++)
+    Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i)
+
+  Resto = (Soma * 10) % 11
+
+  if ((Resto == 10) || (Resto == 11)) 
+    Resto = 0
+
+  if (Resto != parseInt(strCPF.substring(10, 11) ) )
+    return false
+
+  return true
+}
+
 function consulta_cpf(cpf) {
     $.ajax({
         dataType: "json",
@@ -85,24 +136,28 @@ function envia_email(email) {
 
 function conclui_etapa(div_pai, etapa_atual, btn, proxima_etapa){
 
-  console.log("div_pai", div_pai);
-    console.log("etapa_atual", etapa_atual);
-    console.log("btn", btn);
+  //console.log("div_pai", div_pai);
+   // console.log("etapa_atual", etapa_atual);
+   // console.log("btn", btn);
 
   if( div_pai && etapa_atual ){
 
     btn.text('VALIDANDO...');
-    var inputs_area = div_pai.find('input');
+    var inputs_area = div_pai.find('input, select');
 
-    console.log("inputs_area", inputs_area);
+   // console.log("inputs_area", inputs_area);
 
     inputs_area.each(function(index, el) {
             var ell = $(this);
             var fieldName = ell.attr('name');
             var fieldValue = ell.val();
 
-            etapa_atual.find("[data-preenchido='"+fieldName+"']").text(fieldValue);
+            if(fieldName != 'pagamento'){
+              etapa_atual.find("[data-preenchido='"+fieldName+"']").text(fieldValue);
+            }
         });
+
+    etapa_atual.find("[data-preenchido='pagamento']").text(sessionStorage.getItem("pagamento"));
 
         div_pai.addClass('hide_concluido');
         etapa_atual.removeClass('hide_concluido');
@@ -130,25 +185,32 @@ function validacoes_etapa(elemento_click, etapa, proxima_etapa){
             var fieldValue = ell.val();
             var fieldType = ell.attr('type');
 
-            if (fieldType === 'email') {
+          if (fieldType === 'email') {
 
-          if (/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/.test(fieldValue.trim())) {
-                    // console.log("Email Válido");
-                    ell.css('border-color', '#8b8c92');
-                } else {
-                    // console.log("Email Inválido");
-                    ell.css('border-color', 'red');
-                    redBordersCount.push(1); // Incrementa 1 ao array
-                }
-      } else {
-          if (ell.attr('required') && fieldValue.trim().length < 1) {
-              console.log("Campo Obrigatório:",fieldName);
+            if (/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/.test(fieldValue.trim())) {
+                // console.log("Email Válido");
+                ell.css('border-color', '#8b8c92');
+            } else {
+                // console.log("Email Inválido");
+                ell.css('border-color', 'red');
+                redBordersCount.push(1); // Incrementa 1 ao array
+            }
+          }else if(fieldName === "cpf"){
+            if(!validaCPF(fieldValue)){
               ell.css('border-color', 'red');
-              redBordersCount.push(1); // Incrementa 1 ao array
-          } else {
+              redBordersCount.push(1);
+            } else {
               ell.css('border-color', '#8b8c92');
+            }
+          } else {
+              if (ell.attr('required') && fieldValue.trim().length < 1) {
+                  console.log("Campo Obrigatório:",fieldName);
+                  ell.css('border-color', 'red');
+                  redBordersCount.push(1); // Incrementa 1 ao array
+              } else {
+                  ell.css('border-color', '#8b8c92');
+              }
           }
-      }
         });
     }
 
@@ -470,31 +532,7 @@ $('[data-id]').on('click', function() {
             sessionStorage.setItem("portabilidade_nome", "novo");
         }
         sessionStorage.setItem("portabilidade", radio);
-        console.log(radio);
-    });
-
-    $("input[value='dcc']").attr("checked", "checked"); // JÁ CRIA A SESSION COM O VALOR DO PAGAMENTO PRÉ SELECIONADO (DCC)
-    sessionStorage.setItem("pagamento", $("input[name='pagamento']:checked").val());
-
-    $("input[name='pagamento']").change(function () {
-        var radio = $("input[name='pagamento']:checked").val();
-        var input_dcc = $("div[data-opcional='dcc']");
-
-        if (radio == "dcc") {
-            input_dcc.removeClass("hide");
-            input_dcc.find("input").attr("required", "true");
-            dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Débito", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
-            $("#banco").attr("required", "true");
-        } else {
-            input_dcc.addClass("hide");
-            input_dcc.find("input").removeAttr("required");
-            $("input[value='dcc']").removeAttr("checked");
-            dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Boleto", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
-            $("#banco").removeAttr("required");
-        }
-
-        sessionStorage.setItem("pagamento", radio);
-        console.log(radio);
+       // console.log(radio);
     });
 
     $(document).on("click", ".dia_vencimento", function (e) {
@@ -507,7 +545,7 @@ $('[data-id]').on('click', function() {
         $("input[name='dia_vencimento']").val(
             dia_vencimento.attr("data-vencimento")
         );
-        console.log($("input[name='dia_vencimento']").val());
+       // console.log($("input[name='dia_vencimento']").val());
 
         dataLayer.push({
             event: "evento_escolher_vencimento",
@@ -568,6 +606,9 @@ $('[data-id]').on('click', function() {
         var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
         let invalid = false;
         inputs.forEach(function (item) {
+
+          console.log("form_input_" +  item.attr("name"), item.val());
+
             let expre;
             const input_name = item.attr("name");
             let val =
@@ -596,7 +637,7 @@ $('[data-id]').on('click', function() {
                     expre = !validEmail(val);
                     break;
                 case "cpf":
-                    expre = val.length !== 11;
+                    expre = !validaCPF(val);
                     break;
                 case "data_nascimento":
                     expre = !/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i.test(item.val());
@@ -608,6 +649,7 @@ $('[data-id]').on('click', function() {
             if (expre) {
                 item.focus();
                 item.css("border-color", "red");
+                item[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
                 invalid = true;
             }
         });
@@ -646,8 +688,32 @@ sessionStorage.setItem('valor_plano_escolhido', sessionStorage.getItem('original
     }
 );
 
+
+  $("input[value='dcc']").attr("checked", "checked"); // JÁ CRIA A SESSION COM O VALOR DO PAGAMENTO PRÉ SELECIONADO (DCC)
+  sessionStorage.setItem("pagamento", $("input[name='pagamento']:checked").val());
+
   $('[name="pagamento"]').on('change', function(e) {
     e.stopImmediatePropagation();
+
+    var radio = $("input[name='pagamento']:checked").val();
+    var input_dcc = $("div[data-opcional='dcc']");
+
+    if (radio == "dcc") {
+        input_dcc.removeClass("hide");
+        input_dcc.find("input").attr("required", "true");
+        dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Débito", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
+        $("#banco").attr("required", "true");
+    } else {
+        input_dcc.addClass("hide");
+        input_dcc.find("input").removeAttr("required");
+        $("input[value='dcc']").removeAttr("checked");
+        dataLayer.push({ event: "evento_escolher_pagamento", v_evento: "evento_escolher_pagamento", v_etapa: "Etapa 5", v_valor: valor_plano_escolhido, v_plano: plano_escolhido, v_tipo_pagto: "Boleto", v_tipo: sessionStorage.getItem("portabilidade_nome"), });
+        $("#banco").removeAttr("required");
+    }
+
+    sessionStorage.setItem("pagamento", radio);
+  //  console.log("pagamento", radio);
+
     var valor_total = parseFloat($('[data-valor-total]').text().replace(',', '.').replace(/[^\d.-]/g, ''));
     var valor_internet = parseFloat(sessionStorage.getItem('valor_plano_escolhido').replace(',', '.').replace(/[^\d.-]/g, ''));
 
