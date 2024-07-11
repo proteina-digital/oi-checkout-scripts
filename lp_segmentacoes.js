@@ -200,23 +200,31 @@ function title_case(str) {
 
             if(!found) {
                 $(this).hide();
-                if($(window).width() < 768) {
-                  wslide.appendTo(".cards-slider");
-                  wslide.addClass('w-condition-invisible');
-                  // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
-                }
+                wslide.appendTo(".cards-slider");
+                wslide.addClass('w-condition-invisible');
+                // if($(window).width() < 768) {
+                //   wslide.appendTo(".cards-slider");
+                //   wslide.addClass('w-condition-invisible');
+                //   // $(this).closest('[data-slider-nav]').find('.w-slider-dot:last-child').show();
+                // }
             } else {
                 $(this).show();
-                if($(window).width() < 768) {
-                  if(wslide.parent().hasClass('cards-slider')) {
+                if(wslide.parent().hasClass('cards-slider')) {
                     var $origin = '#' + wslide.attr('data-origin');
                     wslide.appendTo($origin);
                   }
                   wslide.removeClass('w-condition-invisible');
-                }
+                // if($(window).width() < 768) {
+                //   if(wslide.parent().hasClass('cards-slider')) {
+                //     var $origin = '#' + wslide.attr('data-origin');
+                //     wslide.appendTo($origin);
+                //   }
+                //   wslide.removeClass('w-condition-invisible');
+                // }
             }
 
             Webflow.require('slider').redraw();
+            Webflow.require('slider').ready();
 
         })
 
