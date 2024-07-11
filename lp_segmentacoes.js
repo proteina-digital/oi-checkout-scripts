@@ -244,14 +244,16 @@ function title_case(str) {
                 card.find('.image-icon-card-2').css('display', 'none');
             }
 
-            if(plano_atual.banner === true) {
-                $('.section-banner [data-link-banner]').each(function() {
+            if(plano_atual.banner) {
+                $('[data-link-banner]').each(function() {
                     var link_banner = $(this)
                     link_banner.attr('href', replaceUrlParam(link_banner.attr('href'), 'plano', plano_atual.nome+'mb'));
                     link_banner.attr('data-megas', plano_atual.nome+'mb');
                 });
-                $('.section-banner [data-mb-banner]').text(plano_atual.nome);
-                $('.section-banner [data-preco-banner]').text(plano_atual.preco.split(',')[0]);
+                $('[data-mb-banner]').text(plano_atual.nome);
+                $('[data-preco-banner]').text(plano_atual.preco.split(',')[0]);
+
+                console.log("BANNER TRUE: ", plano_atual.nome);
             }
 
             if(plano_atual.popup === true) {
