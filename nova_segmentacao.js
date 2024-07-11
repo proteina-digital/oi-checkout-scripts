@@ -7,10 +7,9 @@ const nova_segmentacao_precos = [
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: true },
-	        { nome: 700, preco: "139,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 1, preco: "189,90", mais_vendido: false, popup: false, banner: false }
+	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
+	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
 	{
@@ -18,10 +17,9 @@ const nova_segmentacao_precos = [
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: true },
-	        { nome: 700, preco: "139,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 1, preco: "189,90", mais_vendido: false, popup: false, banner: false }
+	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
+	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
 	{
@@ -29,10 +27,9 @@ const nova_segmentacao_precos = [
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: true },
-	        { nome: 700, preco: "139,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 1, preco: "189,90", mais_vendido: false, popup: false, banner: false }
+	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
+	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	},
 	{
@@ -40,11 +37,10 @@ const nova_segmentacao_precos = [
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: false },
-	        { nome: 600, preco: "109,90", mais_vendido: false, popup: false, banner: true },
-	        { nome: 700, preco: "139,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
+	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 7001, preco: "169,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 1, preco: "189,90", mais_vendido: false, popup: false, banner: false },
+	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 1001, preco: "199,90", mais_vendido: false, popup: false, banner: false }
 	    ],
 	}
