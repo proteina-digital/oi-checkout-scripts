@@ -13,8 +13,8 @@ function validaAgenciaConta(banco, campo, agencia_ou_conta) {
 
     switch (banco) {
         case 'Banco Bradesco':
-            agenciaPattern = /^\d{4}-\d$/;
-            contaPattern = /^\d{7}-\d$/;
+            agenciaPattern = /^\d{4}-[A-Za-z0-9]$/;
+            contaPattern = /^\d{7}-[A-Za-z0-9]$/;
             break;
         case 'Banco do Brasil':
             agenciaPattern = /^\d{4}-[A-Za-z0-9]$/;
@@ -22,11 +22,11 @@ function validaAgenciaConta(banco, campo, agencia_ou_conta) {
             break;
         case 'Banco Santander':
             agenciaPattern = /^\d{4}$/;
-            contaPattern = /^\d{8}-\d$/;
+            contaPattern = /^\d{8}-[A-Za-z0-9]$/;
             break;
         case 'Itaú Unibanco':
             agenciaPattern = /^\d{4}$/;
-            contaPattern = /^\d{5}-\d$/;
+            contaPattern = /^\d{5}-[A-Za-z0-9]$/;
             break;
         case 'Nubank':
             agenciaPattern = /^0001$/;
@@ -190,7 +190,7 @@ function envia_email(email) {
 
 
 Webflow.push(function () {
-    
+
     jQuery('select[name="banco"]').on('change', function () {
         var banco = this.value;
         var $agencia = jQuery('input[name="agencia"]');
