@@ -190,6 +190,7 @@ function envia_email(email) {
 
 
 Webflow.push(function () {
+    
     jQuery('select[name="banco"]').on('change', function () {
         var banco = this.value;
         var $agencia = jQuery('input[name="agencia"]');
@@ -202,27 +203,27 @@ Webflow.push(function () {
 
         switch (banco) {
             case 'Banco Bradesco':
-                $agencia.mask('0000-0');
-                $agencia.attr('placeholder', '9999-9');
-                $conta.mask('0000000-0');
+                $agencia.mask('0000-S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
+                $agencia.attr('placeholder', '9999-X');
+                $conta.mask('0000000-S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
                 $conta.attr('placeholder', '9999999-X');
                 break;
             case 'Banco do Brasil':
-                $agencia.mask('0000-A');
+                $agencia.mask('0000-S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
                 $agencia.attr('placeholder', '9999-X');
-                $conta.mask('00000-000A');
+                $conta.mask('00000-000S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
                 $conta.attr('placeholder', '99999-999X');
                 break;
             case 'Banco Santander':
                 $agencia.mask('0000');
                 $agencia.attr('placeholder', '9999');
-                $conta.mask('00000000-0');
+                $conta.mask('00000000-S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
                 $conta.attr('placeholder', '99999999-X');
                 break;
             case 'Itaú Unibanco':
                 $agencia.mask('0000');
                 $agencia.attr('placeholder', '9999');
-                $conta.mask('00000-0');
+                $conta.mask('00000-S', { translation: { 'S': { pattern: /[A-Za-z0-9]/ } } });
                 $conta.attr('placeholder', '99999-X');
                 break;
             case 'Nubank':
