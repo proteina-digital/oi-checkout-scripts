@@ -235,6 +235,30 @@ Webflow.push(function () {
         }
     });
 
+    function atualizarEndereco() {
+        var cep = sessionStorage.getItem('cep');
+        var cidade = sessionStorage.getItem('cidade');
+        var estado = sessionStorage.getItem('uf');
+        
+        var endereco = jQuery('#endereco_instalacao').val();
+        var numero = jQuery('#numero').val();
+        var bairro = jQuery('#bairro').val();
+
+        if (endereco && numero && bairro) {
+            var enderecoFormatado = endereco + ', ' + numero + ' - ' + cep + ', ' + bairro + ', ' + cidade + ' - ' + estado;
+            jQuery('.endereco_instalacao').text(enderecoFormatado);
+            sessionStorage.setItem('endereco_fornecido', enderecoFormatado);
+            sessionStorage.setItem("campo_endereco1", endereco);
+            sessionStorage.setItem("bairro", bairro);
+            sessionStorage.setItem("numero", numero);
+        }
+    }
+
+    // Eventos para detectar quando os campos foram preenchidos
+    jQuery('#endereco_instalacao, #numero, #bairro').on('blur change', function() {
+        atualizarEndereco();
+    });
+
 
   $("[data-option-saude]").on('click', function() {
     $('[data-select-dependentes]').toggleClass('hide')
