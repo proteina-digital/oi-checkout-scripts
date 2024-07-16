@@ -190,6 +190,51 @@ function envia_email(email) {
 
 
 Webflow.push(function () {
+    jQuery('select[name="banco"]').on('change', function () {
+        var banco = this.value;
+        var $agencia = jQuery('input[name="agencia"]');
+        var $conta = jQuery('input[name="conta"]');
+
+        $agencia.unmask();
+        $conta.unmask();
+        $agencia.attr('placeholder', 'Agência');
+        $conta.attr('placeholder', 'Conta');
+
+        switch (banco) {
+            case 'Banco Bradesco':
+                $agencia.mask('0000-0');
+                $agencia.attr('placeholder', '9999-9');
+                $conta.mask('0000000-0');
+                $conta.attr('placeholder', '9999999-X');
+                break;
+            case 'Banco do Brasil':
+                $agencia.mask('0000-A');
+                $agencia.attr('placeholder', '9999-X');
+                $conta.mask('00000-000A');
+                $conta.attr('placeholder', '99999-999X');
+                break;
+            case 'Banco Santander':
+                $agencia.mask('0000');
+                $agencia.attr('placeholder', '9999');
+                $conta.mask('00000000-0');
+                $conta.attr('placeholder', '99999999-X');
+                break;
+            case 'Itaú Unibanco':
+                $agencia.mask('0000');
+                $agencia.attr('placeholder', '9999');
+                $conta.mask('00000-0');
+                $conta.attr('placeholder', '99999-X');
+                break;
+            case 'Nubank':
+                $agencia.mask('0000');
+                $agencia.attr('placeholder', '0001');
+                $conta.mask('00000000');
+                $conta.attr('placeholder', '99999999');
+                break;
+        }
+    });
+
+
   $("[data-option-saude]").on('click', function() {
     $('[data-select-dependentes]').toggleClass('hide')
   });
