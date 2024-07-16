@@ -2,6 +2,60 @@ var Webflow = Webflow || [];
 const search = window.location.search;
 var cpf_valido = false;
 
+function validaAgenciaConta(banco, campo, agencia_ou_conta) {
+    var agenciaPattern, contaPattern;
+
+    var tipo_pagamento = sessionStorage.getItem('pagamento');
+
+    if (tipo_pagamento === null || tipo_pagamento != "dcc") {
+        return true;
+    }
+
+    switch (banco) {
+        case 'Banco Bradesco':
+            agenciaPattern = /^\d{4}-\d$/;
+            contaPattern = /^\d{7}-\d$/;
+            break;
+        case 'Banco do Brasil':
+            agenciaPattern = /^\d{4}-[A-Za-z0-9]$/;
+            contaPattern = /^\d{5}-\d{3}[A-Za-z0-9]$/;
+            break;
+        case 'Banco Santander':
+            agenciaPattern = /^\d{4}$/;
+            contaPattern = /^\d{8}-\d$/;
+            break;
+        case 'Itaú Unibanco':
+            agenciaPattern = /^\d{4}$/;
+            contaPattern = /^\d{5}-\d$/;
+            break;
+        case 'Nubank':
+            agenciaPattern = /^0001$/;
+            contaPattern = /^\d{8}$/;
+            break;
+        default:
+            agenciaPattern = /.*/;
+            contaPattern = /.*/;
+            break;
+    }
+
+    // Verificação de sequência ou repetição
+    var sequencialRepetido = /^(\d)\1+$|0123456789|9876543210/;
+
+    if (campo == 'agencia') {
+        if (!agenciaPattern.test(agencia_ou_conta) || sequencialRepetido.test(agencia_ou_conta.replace(/-/g, ''))) {
+            return false;
+        }
+    }
+
+    if (campo == 'conta') {
+        if (!contaPattern.test(agencia_ou_conta) || sequencialRepetido.test(agencia_ou_conta.replace(/-/g, ''))) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function validaCPF(cpf) {
   var Soma = 0
   var Resto
@@ -503,7 +557,7 @@ $('[data-id]').on('click', function() {
 
         if (!cpf_valido) return false;
 
-        var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']")];
+        var inputs = [form.find("input[name='celular']"), form.find("input[name='outro_telefone']"), form.find("input[name='telefone_atual']"), form.find("input[name='email']"), form.find("input[name='cpf']"), form.find("input[name='nome_completo']"), form.find("input[name='data_nascimento']"), form.find("input[name='agencia']"), form.find("input[name='conta']")];
         let invalid = false;
         inputs.forEach(function (item) {
             let expre;
@@ -538,6 +592,12 @@ $('[data-id]').on('click', function() {
                     break;
                 case "data_nascimento":
                     expre = !/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i.test(item.val());
+                    break;
+                case "agencia":
+                    expre = !validaAgenciaConta(form.find("select[name='banco']"), "agencia", val);
+                    break;
+                case "conta":
+                    expre = !validaAgenciaConta(form.find("select[name='banco']"), "conta", val);
                     break;
                 default:
                     true;
