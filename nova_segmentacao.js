@@ -6,7 +6,6 @@ const nova_segmentacao_precos = [
 		nome: "novo_regular",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
 	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
@@ -16,7 +15,6 @@ const nova_segmentacao_precos = [
 		nome: "novo_combate",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
 	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
@@ -26,7 +24,6 @@ const nova_segmentacao_precos = [
 		nome: "guerrilha1",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
 	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 1, preco: "159,90", mais_vendido: false, popup: false, banner: false }
@@ -36,7 +33,6 @@ const nova_segmentacao_precos = [
 		nome: "alto_valor",
 	    produtos: [
 	        { nome: 200, preco: "79,90", mais_vendido: false, popup: false, banner: false },
-	        { nome: 400, preco: "89,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 500, preco: "89,90", mais_vendido: true, popup: true, banner: true },
 	        { nome: 700, preco: "109,90", mais_vendido: false, popup: false, banner: false },
 	        { nome: 7001, preco: "169,90", mais_vendido: false, popup: false, banner: false },
