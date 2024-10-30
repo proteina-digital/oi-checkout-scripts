@@ -4,7 +4,7 @@ var cpf_valido = false;
 function consulta_cpf(cpf) {
     $.ajax({
         dataType: "json",
-        url: "https://formularios.proteina.digital/escale/consulta_cpf.php?cpf=" + cpf,
+        url: "https://proteina.escale.com.br/escale/consulta_cpf.php?cpf=" + cpf,
         type: 'get',
         // async: false,
         timeout: 5000,
@@ -63,7 +63,7 @@ function envia_email(email) {
     var cidade_estado = sessionStorage.getItem('cidade_estado')
 
     $.ajax({
-        url: 'https://formularios.proteina.digital/escale/oi_checkout/abandono/enviar_email.php',
+        url: 'https://proteina.escale.com.br/escale/oi_checkout/abandono/enviar_email.php',
         dataType: 'text',
         type: 'post',
         contentType: 'application/x-www-form-urlencoded',
