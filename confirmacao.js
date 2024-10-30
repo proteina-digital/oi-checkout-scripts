@@ -13,7 +13,7 @@ function finish_order() {
           const cep = sessionStorage.getItem('cep_')
   
           $.ajax({
-              url: 'https://formularios.proteina.digital/escale/oi_abandono.php',
+              url: 'https://proteina.escale.com.br/escale/oi_abandono.php',
               dataType : "text",
               type: 'post',
               contentType: 'application/x-www-form-urlencoded',
@@ -82,7 +82,7 @@ function envia_dados_instalacao(periodo, periodo_id, agendamento_data) {
 
 
         $.ajax({
-            url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
+            url: 'https://proteina.escale.com.br/escale/oi_checkout/pre_envio.php',
             dataType: 'text',
             type: 'post',
             contentType: "application/json; charset=utf-8",
@@ -162,7 +162,7 @@ Webflow.push(function () {
     var agendamento_data_1 = sessionStorage.getItem('agendamento_data_1')
     var agendamento_data_2 = sessionStorage.getItem('agendamento_data_2')
     $.ajax({
-        url: 'https://formularios.proteina.digital/escale/oi_checkout/pre_envio.php',
+        url: 'https://proteina.escale.com.br/escale/oi_checkout/pre_envio.php',
         dataType: 'text',
         type: 'post',
         contentType: "application/json; charset=utf-8",
