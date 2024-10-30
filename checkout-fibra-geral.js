@@ -411,7 +411,7 @@ function send_phonemanager(cep, telefone, campanha, source, medium, numero_ender
     sessionStorage.setItem('cep_', cep)
 
     $.ajax({
-      url: 'https://formularios.proteina.digital/escale/phonemanager_ajax_abandono.php',
+      url: 'https://proteina.escale.com.br/escale/phonemanager_ajax_abandono.php',
       dataType: 'text',
       type: 'post',
       contentType: 'application/x-www-form-urlencoded',
@@ -477,7 +477,7 @@ function form_cobertura(form){
     }
 
   $.ajax({
-        url: 'https://formularios.proteina.digital/escale/cobertura_oi_v4.php',
+        url: 'https://proteina.escale.com.br/escale/cobertura_oi_v4.php',
         type:"POST",
         dataType:'text',
           timeout: 10000,
